@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
         DB::table('users')->insert([
             'name' => 'Jeamar Libres',
             'email' => 'jeamar1234@gmail.com',
-            'password' => 'jeamar123'
+            'password' => md5('jeamar123')
         ]);
     }
 
