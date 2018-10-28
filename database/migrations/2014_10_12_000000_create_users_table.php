@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             'name' => 'Jeamar Libres',
             'email' => 'jeamar1234@gmail.com',
             'password' => 'jeamar123'
-        ]
+        ]);
     }
 
     /**
