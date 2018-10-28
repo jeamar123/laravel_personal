@@ -1,0 +1,69 @@
+/* ----------- OPEN SANS ----------------- */
+    @font-face {
+        font-family: 'Open Sans'; /* Global font */
+        src: url('../fonts/open-sans/OpenSans-Regular.ttf')  format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Open Sans Light'; /* Global font */
+        src: url('../fonts/open-sans/OpenSans-Light.ttf')  format('truetype');
+    }
+
+
+
+
+
+/* ----------- Helvetica ----------------- */
+    @font-face {
+        font-family: 'Helvetica Thin'; /* Global font */
+        src: url('../fonts/helveticaneue/HelveticaNeue Thin.ttf')  format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Helvetica Light'; /* Global font */
+        src: url('../fonts/helveticaneue/HelveticaNeue Light.ttf')  format('truetype');
+    }
+
+
+
+
+
+/*------------- Roboto ---------------*/
+    @font-face {
+        font-family: 'Roboto'; /* Global font */
+        src: url('../fonts/roboto/Roboto-Regular.ttf')  format('truetype');
+    }
+    @font-face {
+        font-family: 'Roboto Light'; /* Global font */
+        src: url('../fonts/roboto/Roboto-Light.ttf')  format('truetype');
+    }
+
+
+
+
+
+/*------------- MYRIAD ---------------*/
+    @font-face {
+        font-family: 'Myriad'; /* Global font */
+        src: url('../fonts/myriad/MyriadPro-Regular.otf')  format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Myriad Light'; /* Global font */
+        src: url('../fonts/myriad/MyriadPro-Light.otf')  format('truetype');
+    }
+
+
+
+
+
+/*------------- MYRIAD ---------------*/
+    @font-face {
+        font-family: 'Proximanova'; /* Global font */
+        src: url('../fonts/proximanova/Proxima Nova Regular.ttf')  format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Proximanova Thin'; /* Global font */
+        src: url('../fonts/proximanova/Proxima Nova Thin.ttf')  format('truetype');
+    }
