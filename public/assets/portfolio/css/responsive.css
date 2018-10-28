@@ -53,6 +53,8 @@
 
 
 
+
+
 /*==========  Non-Mobile First Method  ==========*/
 
 @media only screen and (max-width : 1280px) {
@@ -65,6 +67,24 @@
 
 @media only screen and (max-width : 1200px) {
 
+}
+
+@media only screen and (max-width : 1150px) {
+  .section-item {
+    width: 80%;
+	}
+
+	.skillset-container {
+	  width: 100%;
+	}
+
+	.skillset-container .skills-content{
+    width: 80%;
+  }
+
+  #footer-container .footer-contact {
+	    width: 90%;
+	}
 }
 
 @media only screen and (max-width : 1050px) {
@@ -80,12 +100,33 @@
 }
 
 @media only screen and (max-width : 880px) {
-    
+  .section-item {
+    width: 95%;
+	}
+
+	.skillset-container {
+	  width: 100%;
+	}
+
+	.skillset-container .skills-content{
+    width: 95%;
+  }
 }
 
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
+	.expertise-container{
+    flex-direction: column;
+  }
 
+  .expertise-container .expertise {
+    margin-bottom: 50px;
+    text-align: center;
+	}
+
+	#footer-container .footer-contact .contact-column {
+    padding: 0px 10px;
+	}
 }
 
 @media only screen and (max-width : 574px) {

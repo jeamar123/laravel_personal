@@ -64,7 +64,7 @@
   #backTop-container{
     display: none;
     position: fixed;
-    bottom: 480px;
+    bottom: 20px;
     left: 20px;
     z-index: 9999;
     cursor: pointer;
@@ -86,7 +86,7 @@
 
   .sidenav-dots-container{
     position: fixed;
-    top: 30vh;
+    top: 20vh;
     right: 20px;
     z-index: 999;
     display: none;
@@ -184,7 +184,7 @@
     color: #f5f5f5;
     background-image: url(/img/header-bg22.png);
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     background-position: center top;
   }
 
@@ -275,7 +275,6 @@
   .expertise-container{
     min-height: 300px;
     display: flex;
-    align-items: center;
     /*border-bottom: 1px solid #e9e9e9;*/
   }
 
