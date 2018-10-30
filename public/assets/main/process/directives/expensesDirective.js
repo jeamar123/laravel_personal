@@ -251,21 +251,25 @@ app.directive('expensesDirective', [
               weekday_ctr = 1;
               week_ctr++;
             }
-          }
 
-          for(var i = (weekday_ctr-1); i < 7; i++){
-            if( scope.calendar_arr[week_ctr-1] != undefined ){
-              scope.calendar_arr[week_ctr-1].week.push({
-                enabled : false
-              });
+            if( date_ctr == scope.endOfMonth ){
+              for(var i = (weekday_ctr-1); i < 7; i++){
+                if( scope.calendar_arr[week_ctr-1] != undefined ){
+                  scope.calendar_arr[week_ctr-1].week.push({
+                    enabled : false
+                  });
+                }
+              }
+
+              console.log( scope.monthly_income_total );
+              console.log( scope.monthly_investments_total );
+              console.log( scope.monthly_expenses_total );
+
+              scope.monthly_balance = scope.monthly_income_total - ( scope.monthly_investments_total + scope.monthly_expenses_total );
             }
           }
 
-          console.log( scope.monthly_income_total );
-          console.log( scope.monthly_investments_total );
-          console.log( scope.monthly_expenses_total );
-
-          scope.monthly_balance = scope.monthly_income_total - ( scope.monthly_investments_total + scope.monthly_expenses_total );
+          
           scope.hideLoading();
         }
 
