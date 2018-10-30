@@ -259,7 +259,9 @@ app.directive('expensesDirective', [
             }
           }
 
-          scope.monthly_balance = scope.monthly_income_total - ( scope.monthly_investments_total + scope.monthly_expenses_total );
+          var investExpenses = scope.monthly_investments_total + scope.monthly_expenses_total;
+
+          scope.monthly_balance = scope.monthly_income_total - investExpenses;
           scope.hideLoading();
         }
 
@@ -430,9 +432,7 @@ app.directive('expensesDirective', [
             .then(function(response){
               // console.log(response);
               scope.investments_arr = response.data.investments;
-              angular.forEach( scope.investments_arr ,function( value, key ){ 
-                scope.monthly_investments_total += value.value;
-              });
+              scope.monthly_investments_total = response.data.monthly_investments;
             });
         }
 
@@ -495,9 +495,7 @@ app.directive('expensesDirective', [
             .then(function(response){
               // console.log(response);
               scope.assets_arr = response.data.income;
-              angular.forEach( scope.assets_arr ,function( value, key ){ 
-                scope.monthly_income_total += value.value;
-              });
+              scope.monthly_income_total = response.data.monthly_income;
             });
         }
 

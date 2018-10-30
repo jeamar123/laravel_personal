@@ -26,10 +26,17 @@ class InvestmentsController extends Controller
 
         $get_investments = Investments::whereBetween('full_date', [ new DateTime( $request->get('start') ) , new DateTime( $request->get('end') ) ])->get();
         
+        $total_investments = 0;
+
+        for( $i = 0; $i < count( $get_investments ); $i++ ){
+            $total_investments += $get_investments[$i]->value;
+        }
+
         if( $get_investments ){
             $data['status'] = true;
             $data['message'] = 'Success';
             $data['investments'] = $get_investments;
+            $data['monthly_investments'] = $total_investments;
         }else{
             $data['status'] = false;
             $data['message'] = 'Failed';

@@ -26,10 +26,17 @@ class IncomeController extends Controller
 
         $get_income = Income::whereBetween('full_date', [ new DateTime( $request->get('start') ) , new DateTime( $request->get('end') ) ])->get();
         
+        $total_income = 0;
+
+        for( $i = 0; $i < count( $get_income ); $i++ ){
+            $total_income += $get_income[$i]->value;
+        }
+
         if( $get_income ){
             $data['status'] = true;
             $data['message'] = 'Success';
             $data['income'] = $get_income;
+            $data['monthly_income'] = $total_income;
         }else{
             $data['status'] = false;
             $data['message'] = 'Failed';
