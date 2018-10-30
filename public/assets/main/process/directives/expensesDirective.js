@@ -214,59 +214,66 @@ app.directive('expensesDirective', [
                 temp_expense_arr.push(value);
                 date_expenses_total+= value.value;
               }
-            });
 
-            scope.calendar_arr[week_ctr-1].week.push({
-              date : moment( scope.month_today + ' ' + date_ctr + ', ' + scope.year_today ).format('MMMM DD, YYYY'),
-              date_number : moment( scope.month_today + ' ' + date_ctr + ', ' + scope.year_today ).format('DD'),
-              date_month : moment( scope.month_today + ' ' + date_ctr + ', ' + scope.year_today ).format('MMMM'),
-              date_year : moment( scope.month_today + ' ' + date_ctr + ', ' + scope.year_today ).format('YYYY'),
-              day_name_short : moment( scope.month_today + ' ' + date_ctr + ', ' + scope.year_today ).format('ddd'),
-              day_name_long : moment( scope.month_today + ' ' + date_ctr + ', ' + scope.year_today ).format('dddd'),
-              day_number : moment( scope.month_today + ' ' + date_ctr + ', ' + scope.year_today ).format('d'),
-              enabled : true,
-              expenses_list : temp_expense_arr,
-              expenses_total : date_expenses_total
-            });
+              console.log(scope.expenses_arr);
+              console.log(key);
 
-            week_total += date_expenses_total;
-            scope.monthly_expenses_total += date_expenses_total;
+              if( key == (scope.expenses_arr.length-1) ){
+                scope.calendar_arr[week_ctr-1].week.push({
+                  date : moment( scope.month_today + ' ' + date_ctr + ', ' + scope.year_today ).format('MMMM DD, YYYY'),
+                  date_number : moment( scope.month_today + ' ' + date_ctr + ', ' + scope.year_today ).format('DD'),
+                  date_month : moment( scope.month_today + ' ' + date_ctr + ', ' + scope.year_today ).format('MMMM'),
+                  date_year : moment( scope.month_today + ' ' + date_ctr + ', ' + scope.year_today ).format('YYYY'),
+                  day_name_short : moment( scope.month_today + ' ' + date_ctr + ', ' + scope.year_today ).format('ddd'),
+                  day_name_long : moment( scope.month_today + ' ' + date_ctr + ', ' + scope.year_today ).format('dddd'),
+                  day_number : moment( scope.month_today + ' ' + date_ctr + ', ' + scope.year_today ).format('d'),
+                  enabled : true,
+                  expenses_list : temp_expense_arr,
+                  expenses_total : date_expenses_total
+                });
 
-            temp_expense_arr = [];
-            date_expenses_total = 0;
+                week_total += date_expenses_total;
+                scope.monthly_expenses_total += date_expenses_total;
 
-            if( weekday_ctr < 7 ){
-              weekday_ctr++;
+                temp_expense_arr = [];
+                date_expenses_total = 0;
 
-              if( date_ctr == scope.endOfMonth ){
-                scope.weeks_total.push( week_total );
-              }
-            }else{
-              if( date_ctr != scope.endOfMonth ){
-                scope.calendar_arr.push({ week : [] });
-                scope.weeks_total.push( week_total );
-              }
+                if( weekday_ctr < 7 ){
+                  weekday_ctr++;
 
-              week_total = 0;
-              weekday_ctr = 1;
-              week_ctr++;
-            }
+                  if( date_ctr == scope.endOfMonth ){
+                    scope.weeks_total.push( week_total );
+                  }
+                }else{
+                  if( date_ctr != scope.endOfMonth ){
+                    scope.calendar_arr.push({ week : [] });
+                    scope.weeks_total.push( week_total );
+                  }
 
-            if( date_ctr == scope.endOfMonth ){
-              for(var i = (weekday_ctr-1); i < 7; i++){
-                if( scope.calendar_arr[week_ctr-1] != undefined ){
-                  scope.calendar_arr[week_ctr-1].week.push({
-                    enabled : false
-                  });
+                  week_total = 0;
+                  weekday_ctr = 1;
+                  week_ctr++;
+                }
+
+                if( date_ctr == scope.endOfMonth ){
+                  for(var i = (weekday_ctr-1); i < 7; i++){
+                    if( scope.calendar_arr[week_ctr-1] != undefined ){
+                      scope.calendar_arr[week_ctr-1].week.push({
+                        enabled : false
+                      });
+                    }
+                  }
+
+                  console.log( scope.monthly_income_total );
+                  console.log( scope.monthly_investments_total );
+                  console.log( scope.monthly_expenses_total );
+
+                  scope.monthly_balance = scope.monthly_income_total - ( scope.monthly_investments_total + scope.monthly_expenses_total );
                 }
               }
+            });
 
-              console.log( scope.monthly_income_total );
-              console.log( scope.monthly_investments_total );
-              console.log( scope.monthly_expenses_total );
 
-              scope.monthly_balance = scope.monthly_income_total - ( scope.monthly_investments_total + scope.monthly_expenses_total );
-            }
           }
 
           
