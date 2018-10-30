@@ -259,9 +259,7 @@ app.directive('expensesDirective', [
             }
           }
 
-          var investExpenses = scope.monthly_investments_total + scope.monthly_expenses_total;
-
-          scope.monthly_balance = scope.monthly_income_total - investExpenses;
+          scope.monthly_balance = scope.monthly_income_total - ( scope.monthly_investments_total + scope.monthly_expenses_total );
           scope.hideLoading();
         }
 
