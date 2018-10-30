@@ -25,11 +25,18 @@ class ExpensesController extends Controller
         $data = array();
 
         $get_expenses = Expenses::whereBetween('full_date', [ new DateTime( $request->get('start') ) , new DateTime( $request->get('end') ) ])->get();
+
+        $total_expenses = 0;
+
+        for( $i = 0; $i < count( $get_expenses ); $i++ ){
+            $total_expenses += $get_expenses[$i]->value;
+        }
         
         if( $get_expenses ){
             $data['status'] = true;
             $data['message'] = 'Success';
             $data['expenses'] = $get_expenses;
+            $data['monthly_total'] = $total_expenses;
         }else{
             $data['status'] = false;
             $data['message'] = 'Failed';
