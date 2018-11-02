@@ -260,6 +260,7 @@ app.directive('expensesDirective', [
           }
 
           scope.monthly_balance = scope.monthly_income_total - ( scope.monthly_investments_total + scope.monthly_expenses_total );
+          console.log( scope.monthly_balance );
           scope.hideLoading();
         }
 
