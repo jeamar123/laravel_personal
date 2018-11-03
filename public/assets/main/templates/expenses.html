@@ -234,7 +234,7 @@
             <div class="date-expense-container">
               <div class="expense-row" ng-repeat="list in selected_date.expenses_list">
                 <input type="checkbox" ng-model="expenses_selected_checkbox[$index]" ng-click="selectExpensesItem( $index, expenses_selected_checkbox[$index], list );">
-                <div class="description" ng-bind="list.description">Fare</div>
+                <div class="description"><span ng-bind="list.description"></span> <span class="category" ng-bind="list.category.name"></span></div>
                 <div class="value"><span ng-bind="list.value | currency:USD$:2">10.00</span></div>
               </div>
 
@@ -256,6 +256,13 @@
               <div class="form-group">
                 <label>Value</label>
                 <input type="number" class="form-control" placeholder="" ng-model="add_expenses.value"/>
+              </div>
+              <div class="form-group">
+                <label>Category</label>
+                <select class="form-control" ng-model="add_expenses.category_id">
+                  <option ng-value=""></option>
+                  <option ng-repeat="list in expenses_categories" ng-value="list.id" ng-bind="list.name"></option>
+                </select>
               </div>  
               <div class="white-space-20"></div>
               <button hidden type="submit"></button>
@@ -273,6 +280,10 @@
                 <label>Value</label>
                 <input type="number" class="form-control" placeholder="" ng-model="expense_update_data.value" ng-model-options="{updateOn: 'blur'}"/>
               </div>  
+              <div class="form-group">
+                <label>Category</label>
+                <select class="form-control" ng-model="expense_update_data.category_id" ng-options="list.id as list.name for list in expenses_categories"></select>
+              </div>  
               <div class="white-space-20"></div>
               <button hidden type="submit"></button>
             </form>
@@ -282,9 +293,9 @@
         <div ng-if="date_modal_view != 0" class="modal-footer">
 
           <button ng-if="date_modal_view == 1 || date_modal_view == 2" type="button" class="btn btn-primary" ng-click="setDateModalView( 0 )">Back</button>
-          <button ng-if="date_modal_view == 1" ng-disabled="!add_expenses.description || !add_expenses.value" type="button" class="btn btn-primary" ng-click="addExpenses( add_expenses )">Submit</button>
+          <button ng-if="date_modal_view == 1" ng-disabled="!add_expenses.description || !add_expenses.value || !add_expenses.category" type="button" class="btn btn-primary" ng-click="addExpenses( add_expenses )">Submit</button>
 
-          <button ng-if="date_modal_view == 2" ng-disabled="!expense_update_data.description || !expense_update_data.value" type="button" class="btn btn-primary" ng-click="updateExpenses( expense_update_data )">Update</button>
+          <button ng-if="date_modal_view == 2" ng-disabled="!expense_update_data.description || !expense_update_data.value || !expense_update_data.category_id" type="button" class="btn btn-primary" ng-click="updateExpenses( expense_update_data )">Update</button>
         </div>
       </div>
     </div>

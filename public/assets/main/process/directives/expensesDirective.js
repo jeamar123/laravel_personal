@@ -34,6 +34,13 @@ app.directive('expensesDirective', [
         scope.investments_arr = [];
         scope.assets_arr = [];
 
+        scope.expenses_categories = [];
+
+        scope.expenses_categories_id = [];
+
+        scope.expensesChartLabels = [];
+        scope.expensesChartData = [];
+
         scope.weeks_total = [];
         scope.monthly_income_total = 0;
         scope.monthly_investments_total = 0;
@@ -125,6 +132,7 @@ app.directive('expensesDirective', [
             scope.expenses_selected_ids.splice( temp_index, 1 );
           }
           scope.expense_update_data = scope.expenses_selected[0];
+          console.log( scope.expense_update_data );
         }
 
         scope.setDateModalView = ( opt ) =>{
@@ -259,15 +267,12 @@ app.directive('expensesDirective', [
             }
           }
 
-          scope.monthly_balance = scope.monthly_income_total - ( scope.monthly_investments_total + scope.monthly_expenses_total );
-          console.log( scope.monthly_balance );
+          // scope.monthly_balance = scope.monthly_income_total - ( scope.monthly_investments_total + scope.monthly_expenses_total );
+          // console.log( scope.monthly_balance );
           scope.hideLoading();
         }
 
         scope.initializeChart = ( ) =>{
-          scope.expensesChartLabels = ['A','B','C','D','E'];
-          scope.expensesChartData = [1,2,3,4,5];
-
           scope.expensesChartOptions = {
             legend: {
               display: true,
@@ -317,6 +322,7 @@ app.directive('expensesDirective', [
         }
 
         scope.updateExpenses =  ( update_data ) =>{
+          console.log( update_data );
           appModule.saveExpenses( update_data )
             .then(function(response){
               console.log(response);
@@ -331,12 +337,13 @@ app.directive('expensesDirective', [
         }
 
         scope.addExpenses =  ( add_data ) =>{
+          console.log(  add_data );
           var data = {
             full_date : moment( scope.selected_date.date ).format( 'YYYY-MM-DD' ),
             day : moment( scope.selected_date.date ).format( 'D' ),
             month : moment( scope.selected_date.date ).format( 'MM' ),
             year : moment( scope.selected_date.date ).format( 'YYYY' ),
-            category : null,
+            category_id : add_data.category_id,
             description : add_data.description,
             value : add_data.value,
           }
@@ -364,9 +371,18 @@ app.directive('expensesDirective', [
 
           appModule.getExpensesPerMonth( data )
             .then(function(response){
-              // console.log(response);
+              console.log(response);
               scope.expenses_arr = response.data.expenses;
               scope.monthly_expenses_total = response.data.monthly_total;
+              angular.forEach( scope.expenses_arr, function( value, key ){
+                // console.log( value );
+                var index = $.inArray( value.category_id, scope.expenses_categories_id );
+                if( index > -1 ){
+                  scope.expensesChartData[index] += value.value;
+                }
+
+                value.category = scope.expenses_categories[index];
+              });
               scope.initializeChart();
               scope.initializeCalendar( date );
             });
@@ -498,6 +514,24 @@ app.directive('expensesDirective', [
             });
         }
 
+        scope.fetchCategories = ( ) =>{
+          scope.expenses_categories = [];
+          scope.expenses_categories_id = [];
+          scope.expensesChartLabels = [];
+          scope.expensesChartData = [];
+          appModule.getExpensesCategories(  )
+            .then(function(response){
+              console.log(response);
+              scope.expenses_categories = response.data;
+              angular.forEach( scope.expenses_categories, function( value, key ){
+                // console.log( value );
+                scope.expenses_categories_id.push( value.id );
+                scope.expensesChartLabels.push( value.name );
+                scope.expensesChartData.push(0);
+              });
+            });
+        }
+
         scope.checkSession = ( ) =>{
           if( sessionFactory.getSession() > 0 ){
             $state.go('expenses');
@@ -531,6 +565,7 @@ app.directive('expensesDirective', [
         scope.onLoad = ( ) =>{
           scope.showLoading();
           scope.checkSession();
+          scope.fetchCategories( );
           scope.fetchAssets( scope.full_date_today );
           scope.fetchInvestments( scope.full_date_today );
           scope.fetchExpenses( scope.full_date_today );

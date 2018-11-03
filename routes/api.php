@@ -32,6 +32,8 @@ Route::post('/investments/add', 'InvestmentsController@addInvestments');
 Route::post('/investments/update', 'InvestmentsController@updateInvestments');
 Route::get('/investments/delete/{id}', 'InvestmentsController@deleteInvestments');
 
+Route::get('/expenses_categories', 'ExpensesCategoryController@getCategories');
+
 Route::get('/income', 'IncomeController@getIncome');
 Route::post('/income/month', 'IncomeController@getIncomeByMonth');
 Route::post('/income/add', 'IncomeController@addIncome');

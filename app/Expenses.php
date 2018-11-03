@@ -13,7 +13,7 @@ class Expenses extends Model
 		'day', 
 		'month', 
 		'year', 
-		'category', 
+		'category_id', 
 		'description', 
 		'value'
 	];

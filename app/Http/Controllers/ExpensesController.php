@@ -53,7 +53,7 @@ class ExpensesController extends Controller
                     'day' => $request->get('day'),
                     'month' => $request->get('month'),
                     'year' => $request->get('year'),
-                    'category' => $request->get('category_name'),
+                    'category_id' => $request->get('category_id'),
                     'description' => $request->get('description'),
                     'value' => $request->get('value'),
                 ]);
@@ -75,6 +75,7 @@ class ExpensesController extends Controller
         $update_data = array(
             'description' => $request->get('description'),
             'value' => $request->get('value'),
+            'category_id' => $request->get('category_id'),
         );
 
         $result = Expenses::where('id', $request->get('id'))->update($update_data);
