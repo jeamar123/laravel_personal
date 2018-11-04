@@ -293,7 +293,7 @@
         <div ng-if="date_modal_view != 0" class="modal-footer">
 
           <button ng-if="date_modal_view == 1 || date_modal_view == 2" type="button" class="btn btn-primary" ng-click="setDateModalView( 0 )">Back</button>
-          <button ng-if="date_modal_view == 1" ng-disabled="!add_expenses.description || !add_expenses.value || !add_expenses.category" type="button" class="btn btn-primary" ng-click="addExpenses( add_expenses )">Submit</button>
+          <button ng-if="date_modal_view == 1" ng-disabled="!add_expenses.description || !add_expenses.value || !add_expenses.category_id" type="button" class="btn btn-primary" ng-click="addExpenses( add_expenses )">Submit</button>
 
           <button ng-if="date_modal_view == 2" ng-disabled="!expense_update_data.description || !expense_update_data.value || !expense_update_data.category_id" type="button" class="btn btn-primary" ng-click="updateExpenses( expense_update_data )">Update</button>
         </div>
