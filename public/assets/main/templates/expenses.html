@@ -1,6 +1,6 @@
 <div class="expenses-content" expenses-directive>
 	<div class="row">
-    <div class="col col-sm-9 col-md-9 no-padding-right">
+    <div class="col col-sm-12 col-md-8 col-lg-8 col-xl-9 no-padding-right">
       <div class="white-box">
 
         <div class="calendar-header">
@@ -16,8 +16,14 @@
         </div>
       	
         <div class="calendar-container">
-          <div class="weekdays-container">
+          <div class="weekdays-container week-long">
             <div class="day" ng-repeat="list in weekdays_long">
+              <span ng-bind="list"></span>
+            </div>
+          </div>
+
+          <div class="weekdays-container week-short">
+            <div class="day" ng-repeat="list in weekdays_short">
               <span ng-bind="list"></span>
             </div>
           </div>
@@ -61,7 +67,7 @@
 
       </div>
     </div>
-    <div class="col col-sm-3 col-md-3">
+    <div class="col col-sm-12 col-md-4 col-lg-4 col-xl-3">
       <div class="white-box">
 
         <canvas id="expense_id" class="chart chart-pie" chart-data="expensesChartData" chart-labels="expensesChartLabels" chart-options="expensesChartOptions"></canvas>

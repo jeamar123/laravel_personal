@@ -12,7 +12,7 @@ app.directive('mapDirective', [
       {
         console.log( "mapDirective Runinng !" );
 
-        var socket = io( 'http://handsomedev.com:8080' );
+        // var socket = io( 'http://handsomedev.com:8080' );
         var iconMarkerBase = 'https://maps.google.com/mapfiles/kml/shapes/';
         var map;
         var infoWindow;
@@ -225,15 +225,15 @@ app.directive('mapDirective', [
             enableHighAccuracy:true
           }); 
 
-          // setTimeout(scope.autoUpdateMap, 5000);
+          setTimeout(scope.autoUpdateMap, 5000);
         }
 
         scope.onLoad = ( ) =>{
           scope.initMap();
 
-          socket.on('notif', function(response) {
-            console.log(response);
-          });
+          // socket.on('notif', function(response) {
+          //   console.log(response);
+          // });
         }
 
       //=================================//

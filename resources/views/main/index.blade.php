@@ -9,8 +9,6 @@
     <title>Manage Expenses</title>
     <link rel="shortcut icon" href="{{ asset('img/logo/jl-logo-blue.png') }}" type="image/ico">
 
-
-    <!-- <link href="{{ asset('css/angular-material.min.css') }}" rel="stylesheet"> -->
     <link rel="stylesheet" type="text/css" href="../css/fonts.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
@@ -18,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/main/css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/custom.css">
     <link rel="stylesheet" type="text/css" href="../css/custom2.css">
-    <!-- <link rel="stylesheet" type="text/css" href="../assets/main/css/responsive.css"> -->
+    <link rel="stylesheet" type="text/css" href="../assets/main/css/responsive.css">
   </head>
   <body ng-controller="mainController">
 
@@ -67,5 +65,5 @@
 
   <script type="text/javascript" src="<?php echo $server; ?>/assets/main/process/services/services.js"></script>
 
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOzaOYgvdwnATwVIvSpYixj32rTLbVF3k"></script> -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOzaOYgvdwnATwVIvSpYixj32rTLbVF3k"></script>
 </html>
