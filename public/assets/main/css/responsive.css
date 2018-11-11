@@ -10,7 +10,7 @@
 
     /* Small Devices, Tablets */
     @media only screen and (min-width : 768px) {
-
+        
     }
 
     /* Medium Devices, Desktops */
@@ -27,6 +27,8 @@
         .week-short{
             display: none !important;
         }
+
+
     }
 
     @media only screen and (max-width : 1199px) {
@@ -71,12 +73,21 @@
 
     /* Medium Devices, Desktops */
     @media only screen and (max-width : 992px) {
-
+        .expenses-content #expense_id{
+            width: 200px;
+            height: 250px;
+        }
     }
 
     /* Small Devices, Tablets */
     @media only screen and (max-width : 768px) {
+        
+    }
 
+    @media only screen and (max-width : 767px) {
+        .sm-hide{
+            display: none;
+        }
     }
 
     /* Extra Small Devices, Phones */ 

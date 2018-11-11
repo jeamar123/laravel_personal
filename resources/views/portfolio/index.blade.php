@@ -2,14 +2,14 @@
 <html lang="en" ng-app="app">
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114115155-1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114115155-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'UA-114115155-1');
-    </script> -->
+    </script>
 
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

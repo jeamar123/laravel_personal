@@ -573,6 +573,9 @@ app.directive('expensesDirective', [
 
         scope.onLoad();
 
+        // $('.modal').modal({
+        //   keyboard : false
+        // });
 
         $('.modal').on('hidden.bs.modal', function (e) {
           scope.resetValues();
