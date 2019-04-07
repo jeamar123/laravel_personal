@@ -478,13 +478,15 @@ app.directive('expensesDirective', [
 
         scope.addAssets =  ( add_data ) =>{
           var data = {
-            full_date : moment( scope.selected_date.date ).format( 'YYYY-MM-DD' ),
-            day : moment( scope.selected_date.date ).format( 'D' ),
-            month : moment( scope.selected_date.date ).format( 'MM' ),
-            year : moment( scope.selected_date.date ).format( 'YYYY' ),
+            full_date : moment( scope.full_date_today ).format( 'YYYY-MM-DD' ),
+            day : moment( scope.full_date_today ).format( 'D' ),
+            month : moment( scope.full_date_today ).format( 'MM' ),
+            year : moment( scope.full_date_today ).format( 'YYYY' ),
             description : add_data.description,
             value : add_data.value,
           }
+
+          console.log( data );
 
           appModule.submitAssets( data )
             .then(function(response){
