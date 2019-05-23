@@ -1,15 +1,17 @@
-app.directive('wallDirective', [
+app.directive('dashboardDirective', [
   '$http',
   '$state',
   '$stateParams',
   '$rootScope',
-  function directive($http,$state,$stateParams,$rootScope) {
+  'appModule',
+  'sessionFactory',
+  function directive($http,$state,$stateParams,$rootScope,appModule,sessionFactory) {
     return {
       restrict: "A",
       scope: true,
       link: function link( scope, element, attributeSet )
       {
-        console.log( "wallDirective Runinng !" );
+        console.log( "dashboardDirective Runinng !" );
 
         scope.onLoad = ( ) =>{
 

@@ -36,10 +36,11 @@ app.directive('authDirective', [
           appModule.loginUser(data)
             .then(function(response) {
               console.log(response);
-              if( response.data.status == true ){
+              if( response.data.status ){
+                console.log( 'eut' );
                 scope.login_err = false;
                 sessionFactory.setSession( response.data.user.id );
-                $state.go('expenses');
+                $state.go('dashboard');
               }else{
                 scope.login_err = true;
               }
@@ -67,7 +68,7 @@ app.directive('authDirective', [
           appModule.signupUser(data)
             .then(function(response) {
               console.log(response);
-              if( response.data.status == true ){
+              if( response.data.status ){
                 scope.some_err = false;
                 scope.err_message = null;
                 scope.some_succ = true;
@@ -82,7 +83,7 @@ app.directive('authDirective', [
 
         scope.checkSession = ( ) =>{
           if( sessionFactory.getSession() > 0 ){
-            $state.go('expenses');
+            $state.go('dashboard');
           }
         }
 

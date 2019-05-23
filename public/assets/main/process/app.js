@@ -32,74 +32,28 @@ app.config(function($stateProvider, $urlRouterProvider){
         }
       },
     })
-    .state('home', {
-      url: '/',
+    .state('dashboard', {
+      url: '/dashboard',
       views: {
-        'header': {
-          templateUrl: '../assets/main/templates/header.html'
-        },
         'main': {
-          templateUrl: '../assets/main/templates/wall.html'
+          templateUrl: '../assets/main/templates/dashboard.html'
         },
-        'rightContent': {
-          templateUrl: '../assets/main/templates/right-content.html'
-        }
       },
     })
-    .state('expenses', {
+    .state('dashboard.summary', {
+      url: '/summary',
+      views: {
+        'body-content@dashboard': {
+          templateUrl: '../assets/main/templates/summary.html'
+        },
+      },
+    })
+    .state('dashboard.expenses', {
       url: '/expenses',
       views: {
-        'header': {
-          templateUrl: '../assets/main/templates/header.html'
-        },
-        'main': {
+        'body-content@dashboard': {
           templateUrl: '../assets/main/templates/expenses.html'
         },
-        'rightContent': {
-          templateUrl: '../assets/main/templates/right-content.html'
-        }
-      },
-    })
-    .state('messages', {
-      url: '/messages',
-      views: {
-        'header': {
-          templateUrl: '../assets/main/templates/header.html'
-        },
-        'main': {
-          templateUrl: '../assets/main/templates/messages.html'
-        },
-        'rightContent': {
-          templateUrl: '../assets/main/templates/right-content.html'
-        }
-      },
-    })
-    .state('map', {
-      url: '/map',
-      views: {
-        'header': {
-          templateUrl: '../assets/main/templates/header.html'
-        },
-        'main': {
-          templateUrl: '../assets/main/templates/map.html'
-        },
-        'rightContent': {
-          templateUrl: '../assets/main/templates/right-content.html'
-        }
-      },
-    })
-    .state('user-settings', {
-      url: '/user-settings',
-      views: {
-        'header': {
-          templateUrl: '../assets/main/templates/header.html'
-        },
-        'main': {
-          templateUrl: '../assets/main/templates/user-settings.html'
-        },
-        'rightContent': {
-          templateUrl: '../assets/main/templates/right-content.html'
-        }
       },
     });
 

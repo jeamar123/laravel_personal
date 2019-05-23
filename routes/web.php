@@ -16,6 +16,6 @@
 // });
 
 Route::get('/', 'HomeController@getPortfolioView');
-Route::get('/manage_expenses', 'HomeController@getManageExpensesView');
+Route::get('/app', 'HomeController@getManageExpensesView');
 
 

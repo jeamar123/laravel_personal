@@ -1,0 +1,43 @@
+.signup-container,
+.login-container{
+  width: 500px;
+  margin: 50px auto;
+  background: #3D4B54;
+  box-shadow: 0px 0px 8px #aaa;
+}
+
+.auth-content .box-content{
+  padding: 30px 50px; 
+}
+
+.auth-content .box-content .img-wrapper{
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 30px auto;
+}
+
+.auth-content .box-content .img-wrapper img{
+  border-radius: 50%;
+}
+
+.auth-content .box-content .submit-btn{
+  background-color: #5892d2;
+  border: none;
+  padding: 10px;
+  border-radius: 2px;
+  font-size: 16px;
+  font-weight: 700;
+  width: 200px;
+}
+
+.text-hover-underline:hover{
+  text-decoration: underline;
+}
+
+.auth-content input{
+  background: #FFF;
+}
+
+.auth-content .account-text{
+  color: #FFF;
+}

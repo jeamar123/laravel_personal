@@ -1,0 +1,55 @@
+<div class="dashboard-container" dashboard-directive>
+	<div class="left-menu-container">
+		<div class="profile-img-container">
+			<img src="../img/user.png">
+			<p class="user-name">Jeamar Libres</p>
+		</div>
+
+		<div class="subpage-nav-container">
+			<div class="subpage-content" ui-sref-active="active" ui-sref="dashboard.summary">
+				<div class="icon-box">
+					<span class="oi" data-glyph="pie-chart" aria-hidden="true"></span>
+				</div>
+				<div class="page-name">
+					<p>Summary</p>
+				</div>
+			</div>
+			<div class="subpage-content" ui-sref-active="active" ui-sref="dashboard.inbox">
+				<div class="icon-box">
+					<span class="oi" data-glyph="envelope-closed" aria-hidden="true"></span>
+				</div>
+				<div class="page-name">
+					<p>Inbox</p>
+				</div>
+			</div>
+			<div class="subpage-content" ui-sref-active="active" ui-sref="dashboard.expenses">
+				<div class="icon-box">
+					<span class="oi" data-glyph="calendar" aria-hidden="true"></span>
+				</div>
+				<div class="page-name">
+					<p>Expenses</p>
+				</div>
+			</div>
+			<div class="subpage-content" ui-sref-active="active" ui-sref="dashboard.settings">
+				<div class="icon-box">
+					<span class="oi" data-glyph="cog" aria-hidden="true"></span>
+				</div>
+				<div class="page-name">
+					<p>Settings</p>
+				</div>
+			</div>
+			<div class="subpage-content">
+				<div class="icon-box">
+					<span class="oi" data-glyph="account-logout" aria-hidden="true"></span>
+				</div>
+				<div class="page-name">
+					<p>Logout</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="right-body-content">
+		<div ui-view="body-content"></div>
+	</div>
+</div>

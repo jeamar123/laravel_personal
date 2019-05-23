@@ -1,0 +1,51 @@
+<div class="summary-container" summary-directive>
+	<div class="page-title">
+  	<p class="main-title">Summary Reports</p>
+
+  	<div class="date-selector">
+  		<p><span class="oi" data-glyph="calendar" aria-hidden="true"></span> <span>April 2019</span></p>
+  	</div>
+  </div>
+
+	<div class="summary-content">
+		<div class="main-summary-items">
+			<div class="summary-item">
+				<p class="item-name">Balance</p>
+				<p class="value">$ <span>1,000.00</span></p>
+			</div>
+			<div class="summary-item">
+				<p class="item-name">Expenses</p>
+				<p class="value">$ <span>1,000.00</span></p>
+			</div>
+			<div class="summary-item">
+				<p class="item-name">Total Assets</p>
+				<p class="value">$ <span>1,000.00</span></p>
+			</div>
+		</div>
+
+		<div class="weekly-and-piechart-container">
+			<div class="weekly-report-container">
+				<p class="item-title">
+					Weekly Report
+				</p>
+
+				<div ng-repeat="list in [1,2,3,4]" class="weekly-expenses">
+					<label><span ng-bind="alphabet[ $index ]"></span> .</label>
+					<p>$S <span>1,500.00</span></p>
+				</div>
+			</div>
+
+			<div class="pie-chart-container">
+				<p class="item-title">
+					Expenses Pie Chart
+				</p>
+
+				<div class="pie-chart-box">
+					<canvas id="pie" class="chart chart-pie" chart-data="expensesChartData" chart-labels="expensesChartLabels" chart-options="expensesChartOptions">
+					</canvas>
+				</div>	
+			</div>
+			
+		</div>
+  </div>
+</div>

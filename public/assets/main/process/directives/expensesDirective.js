@@ -60,7 +60,12 @@ app.directive('expensesDirective', [
         scope.add_asset = {};
 
         scope.showSelectYear = false;
+        scope.expenses_view = 'list';
 
+
+        scope.changeExpensesView = ( view ) =>{
+          scope.expenses_view = view;
+        }
 
         scope.prevYearRange = ( ) =>{
           var first_year = parseInt(scope.years_range_list[0]) - 12;
@@ -535,11 +540,11 @@ app.directive('expensesDirective', [
         }
 
         scope.checkSession = ( ) =>{
-          if( sessionFactory.getSession() > 0 ){
-            $state.go('expenses');
-          }else{
-            $state.go('auth');
-          }
+          // if( sessionFactory.getSession() > 0 ){
+          //   $state.go('expenses');
+          // }else{
+          //   $state.go('auth');
+          // }
         }
 
         scope.swalShow = ( message, type ) =>{

@@ -24,6 +24,11 @@
         src: url('../fonts/helveticaneue/HelveticaNeue Light.ttf')  format('truetype');
     }
 
+    @font-face {
+        font-family: 'Helvetica Bold'; /* Global font */
+        src: url('../fonts/helveticaneue/HelveticaNeueMed.ttf')  format('truetype');
+    }
+
 
 
 
@@ -57,7 +62,7 @@
 
 
 
-/*------------- MYRIAD ---------------*/
+/*------------- Proximanova ---------------*/
     @font-face {
         font-family: 'Proximanova'; /* Global font */
         src: url('../fonts/proximanova/Proxima Nova Regular.ttf')  format('truetype');
@@ -66,4 +71,16 @@
     @font-face {
         font-family: 'Proximanova Thin'; /* Global font */
         src: url('../fonts/proximanova/Proxima Nova Thin.ttf')  format('truetype');
+    }
+
+
+/*------------- Comfortaa ---------------*/
+    @font-face {
+        font-family: 'Comfortaa'; /* Global font */
+        src: url('../fonts/comforta/Comfortaa-Regular.ttf')  format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Comfortaa Light'; /* Global font */
+        src: url('../fonts/comforta/Comfortaa-Light.ttf')  format('truetype');
     }

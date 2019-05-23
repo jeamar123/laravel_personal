@@ -20,25 +20,11 @@
 
     /* Large Devices, Wide Screens */
     @media only screen and (min-width : 1200px) {
-        .week-long{
-            display: flex !important;
-        }
-
-        .week-short{
-            display: none !important;
-        }
-
 
     }
 
     @media only screen and (max-width : 1199px) {
-        .week-long{
-            display: none !important;
-        }
 
-        .week-short{
-            display: flex !important;
-        }
     }
 
 
@@ -47,36 +33,12 @@
 
     /* Large Devices, Wide Screens */
     @media only screen and (max-width : 1200px) {
-        .calendar-container .days-container .date {
-            height: 52px;
-        }
-        .calendar-container .days-container .date .expenses-daily-list {
-            height: 130px;
-        }
-
-        .calendar-container .days-container .date .expenses-daily-list {
-            display: none;
-        }
-
-        .calendar-container .days-container .date .day-total .total-name {
-            display: none;
-        }
-
-        .calendar-container .days-container .date .day-total {
-            height: 26px;
-            align-items: flex-start;
-            flex-direction: column;
-            padding-top: 5px;
-            background-color: #f5f2f2;
-        }
+      
     }
 
     /* Medium Devices, Desktops */
     @media only screen and (max-width : 992px) {
-        .expenses-content #expense_id{
-            width: 200px;
-            height: 250px;
-        }
+      
     }
 
     /* Small Devices, Tablets */
@@ -85,9 +47,16 @@
     }
 
     @media only screen and (max-width : 767px) {
-        .sm-hide{
-            display: none;
-        }
+      
+    }
+
+    /* Extra Small Devices, Phones */ 
+    @media only screen and (max-width : 520px) {
+      .signup-container,
+      .login-container{
+        width: 98%;
+        margin: 10px auto;
+      }
     }
 
     /* Extra Small Devices, Phones */ 
@@ -97,9 +66,7 @@
 
     /* Custom, iPhone Retina */ 
     @media only screen and (max-width : 360px) {
-        .brand .brand-details button {
-            font-size: 12px;
-        }
+      
     }
 
     /* Custom, iPhone Retina */ 
