@@ -143,6 +143,7 @@ p{
   .page-title .date-selector{
     text-align: right;
     flex: 1;
+    position: relative;
   }
   .page-title p{
     margin: 0;
@@ -150,6 +151,34 @@ p{
     font-size: 20px;
     font-family: 'Helvetica Bold';
   }
+  .page-title .date-btn{
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+  }
+  /*.page-title .date-selector .datepicker-container{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #FFF;
+    padding: 5px;
+    box-shadow: 0px 0px 8px #aaa;
+    font-weight: 800;
+    font-family: 'Helvetica Light';
+    color: #000;
+    width: 350px;
+  }*/
+  .datepicker-input{
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    outline: none;
+    height: 100%;
+    width: 100%;
+  }
+  
 /*------------------------------*/
 
 
@@ -170,7 +199,7 @@ p{
 
   table thead tr th:first-child,
   table tbody tr td:first-child{
-    padding-left: 0px;
+    /*padding-left: 0px;*/
   }
 
   table tbody tr td{
@@ -181,7 +210,7 @@ p{
   table thead tr th:last-child,
   table tbody tr td:last-child{
     text-align: center;
-    padding-right: 0;
+    /*padding-right: 0;*/
   }
 
   table tbody{

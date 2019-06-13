@@ -2,8 +2,13 @@
 	<div class="page-title">
   	<p class="main-title">Summary Reports</p>
 
-  	<div class="date-selector">
-  		<p><span class="oi" data-glyph="calendar" aria-hidden="true"></span> <span>April 2019</span></p>
+  	<div class="date-selector" >
+  		<p>
+  			<span class="date-btn" ng-click="toggleDatePicker()">
+  				<span>April 2019</span> <span class="oi" data-glyph="calendar" aria-hidden="true"></span> 
+  				<input type="text" class="datepicker-input" ng-model="dateFilterVal">
+  			</span>
+  		</p>
   	</div>
   </div>
 
@@ -24,6 +29,28 @@
 		</div>
 
 		<div class="weekly-and-piechart-container">
+			<div class="graph-chart-container">
+				<p class="item-title">
+					Monthly Graph
+				</p>
+
+				<div class="chart-box">
+					<canvas id="line" class="chart chart-line" chart-data="expensesLineChartData" chart-labels="expensesLineChartLabels" chart-options="expensesLineChartOptions">
+					</canvas>
+				</div>	
+			</div>
+
+			<div class="pie-chart-container">
+				<p class="item-title">
+					Expenses Pie Chart
+				</p>
+
+				<div class="chart-box">
+					<canvas id="pie" class="chart chart-pie" chart-data="expensesPieChartData" chart-labels="expensesPieChartLabels" chart-options="expensesPieChartOptions">
+					</canvas>
+				</div>	
+			</div>
+
 			<div class="weekly-report-container">
 				<p class="item-title">
 					Weekly Report
@@ -33,17 +60,6 @@
 					<label><span ng-bind="alphabet[ $index ]"></span> .</label>
 					<p>$S <span>1,500.00</span></p>
 				</div>
-			</div>
-
-			<div class="pie-chart-container">
-				<p class="item-title">
-					Expenses Pie Chart
-				</p>
-
-				<div class="pie-chart-box">
-					<canvas id="pie" class="chart chart-pie" chart-data="expensesChartData" chart-labels="expensesChartLabels" chart-options="expensesChartOptions">
-					</canvas>
-				</div>	
 			</div>
 			
 		</div>
