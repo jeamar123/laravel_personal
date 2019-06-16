@@ -46,6 +46,9 @@ app.config(function($stateProvider, $urlRouterProvider){
         'body-content@dashboard': {
           templateUrl: '../assets/main/templates/summary.html'
         },
+        'date-selector@dashboard.summary': {
+          templateUrl: '../assets/main/templates/date-selector.html'
+        },
       },
     })
     .state('dashboard.expenses', {
@@ -53,6 +56,9 @@ app.config(function($stateProvider, $urlRouterProvider){
       views: {
         'body-content@dashboard': {
           templateUrl: '../assets/main/templates/expenses.html'
+        },
+        'date-selector@dashboard.expenses': {
+          templateUrl: '../assets/main/templates/date-selector.html'
         },
       },
     });

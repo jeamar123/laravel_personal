@@ -58,7 +58,7 @@ appService.factory('appModule', function( serverUrl, $http ){
     return $http.get(serverUrl.url + 'api/investments/delete/' + id);
   };
 
-  // INVESTMENTS
+  // ASSETS
 
   appFactory.getAssetsPerMonth = function( data ) {
     return $http.post(serverUrl.url + 'api/income/month', data);

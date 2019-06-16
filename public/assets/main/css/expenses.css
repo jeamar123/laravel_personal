@@ -109,19 +109,20 @@
 	margin: 0;
 }
 .list-calendar-container{
-	padding: 0px 50% 100px 25px;
+	padding: 0px 25px 100px 25px;
+	/*padding: 0px 50% 100px 25px;*/
   width: 100%;
 	overflow-y: auto;
   height: calc(100vh - 140px);
 }
 .list-calendar-container .date-box{
-	background: #fdfdfd;
-	border: 1px solid #ddd;
+	/*background: #fdfdfd;*/
+	/*border: 1px solid #ddd;*/
 	/*box-shadow: 0px 0px 8px #aaa;*/
 	margin: 5px 5px 10px 5px;
 	font-size: 12px;
 	min-height: 45px;
-	padding: 10px 20px;
+	padding: 10px 20px 10px 0;
 	color: #777;
 	cursor: pointer;
 }
@@ -142,10 +143,6 @@
   vertical-align: middle;
   font-size: 16px;
 }
-.list-calendar-container .expenses-box .date-value{
-	flex: 1;
-	font-size: 15px;
-}
 .list-calendar-container .expenses-box .date-total{
 	flex: 1;
 	font-size: 15px;
@@ -153,15 +150,17 @@
 }
 .list-calendar-container .drop-expenses-container{
   margin-top: 10px;
-  padding-top: 10px;
+  /*padding-top: 10px;*/
   padding-left: 35px;
-  padding-bottom: 10px;
+  /*padding-bottom: 10px;*/
   border-top: 1px solid #f1f1f1;
 }
 .list-calendar-container .list-row{
-	width: 100%;
-	display: flex;
+  width: 100%;
+  display: flex;
   margin-bottom: 5px;
+  background: #FFF;
+  padding: 12px 10px;
 }
 .list-calendar-container .list-row .icon{
 	width: 20px;
@@ -175,9 +174,19 @@
   color: #666;
 }
 .list-calendar-container .list-row .expenses-desc{
+	flex: 3;
+}
+.list-calendar-container .list-row .expenses-cat{
 	flex: 1;
 }
 .list-calendar-container .list-row .value{
 	flex: 1;
 	text-align: right;
+}
+.list-calendar-container .list-row.list-header{
+	padding: 5px 10px;
+}
+.list-calendar-container .list-row.list-header *{
+	font-family: 'Helvetica Bold';
+	color: #333;
 }

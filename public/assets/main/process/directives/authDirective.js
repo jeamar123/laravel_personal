@@ -1,4 +1,4 @@
-app.directive('authDirective', [
+  app.directive('authDirective', [
   '$http',
   '$state',
   '$stateParams',

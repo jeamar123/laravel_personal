@@ -23,16 +23,31 @@ class ExpensesController extends Controller
 
     public function getExpensesByMonth( Request $request ){
         $data = array();
+        $days_arr = array();
+        $startDate = new DateTime( $request->get('start') );
+        $endDate = new DateTime( $request->get('end') );
+        $num_days = $startDate->diff( $endDate );
+        $year = date( 'Y', $request->get('start') );
+        $month = date( 'MM', $request->get('start') );
 
-        $get_expenses = Expenses::whereBetween('full_date', [ new DateTime( $request->get('start') ) , new DateTime( $request->get('end') ) ])->get();
+        $get_expenses = Expenses::whereBetween('full_date', [ $startDate, $endDate ])->get();
 
         $total_expenses = 0;
+
+        for( $i = 0; $i < $num_days->d + 1; $i++ ){
+            array_push( $days_arr, date('Y') ) ;
+        }
+
 
         for( $i = 0; $i < count( $get_expenses ); $i++ ){
             $total_expenses += $get_expenses[$i]->value;
         }
+
         
         if( $get_expenses ){
+            $data['year'] = $year;
+            $data['month'] = $month;
+            $data['days'] = $days_arr;
             $data['status'] = true;
             $data['message'] = 'Success';
             $data['expenses'] = $get_expenses;

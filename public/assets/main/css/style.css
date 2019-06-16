@@ -180,6 +180,7 @@ p{
     width: 180px;
     background: #FFF;
     box-shadow: 0px 0px 5px #929292;
+    z-index: 9999;
   }
   .date-filter-container .filter{
     display: block;

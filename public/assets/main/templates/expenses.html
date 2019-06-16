@@ -2,13 +2,7 @@
 	<div class="page-title">
   	<p class="main-title">Expenses</p>
 
-  	<div class="date-selector">
-  		<p>
-  			<span class="date-btn">
-  				<span class="oi" data-glyph="calendar" aria-hidden="true"></span> <span>April 2019</span>
-  			</span>
-  		</p>
-  	</div>
+  	<div ui-view="date-selector"></div>
   </div>
 
 	<div class="expenses-content">
@@ -53,8 +47,8 @@
 		</div>
 
 		<div class="list-calendar-container" ng-if="expenses_view == 'list'">
-			<div class="date-box" ng-repeat="list in expenses_arr" ng-click="toggleExpensesDrop( list )">
-				<div class="expenses-box">
+			<div class="date-box" ng-repeat="list in expenses_arr" >
+				<div class="expenses-box" ng-click="toggleExpensesDrop( list )">
 					<div class="icon">
 						<span class="oi" data-glyph="caret-right" aria-hidden="true"></span>
 					</div>
@@ -67,11 +61,16 @@
 				</div>
 
 				<div ng-if="list.showDrop" class="drop-expenses-container" >
-					<div class="list-row" ng-repeat="list in [1,2,3]">
-						<div class="icon">
-							<span class="oi" data-glyph="media-stop" aria-hidden="true"></span>
+					<div class="list-row list-header">
+						<p class="expenses-desc">Description</p>
+						<p class="expenses-cat">Category</p>
+						<div class="value">
+							<p>Value</p>
 						</div>
+					</div>
+					<div class="list-row" ng-repeat="list in [1,2,3]">
 						<p class="expenses-desc">Lorem Ipsum</p>
+						<p class="expenses-cat">Food</p>
 						<div class="value">
 							<p>$<span>1,000.00</span></p>
 						</div>
