@@ -3,12 +3,39 @@
   	<p class="main-title">Summary Reports</p>
 
   	<div class="date-selector" >
-  		<p>
-  			<span class="date-btn" ng-click="toggleDatePicker()">
-  				<span>April 2019</span> <span class="oi" data-glyph="calendar" aria-hidden="true"></span> 
-  				<input type="text" class="datepicker-input" ng-model="dateFilterVal">
+  			<span class="date-btn" >
+  				<span ng-click="showDateFilter()">
+  					<span class="date-filter-value" ng-bind="filterValue">April 2019</span> 
+  					<span class="oi" data-glyph="calendar" aria-hidden="true"></span> 
+  				</span>
+
+  				<div ng-if="isFilterShow" class="date-filter-container">
+  					<div ng-show="isMainFilterShow" class="main-filters">
+  						<div class="header-filter">Filters</div>
+  						<div class="filter" ng-click="selectFilterOption( 'Today' )">Today</div>
+  						<div class="filter" ng-click="selectFilterOption( 'Yesterday' )">Yesterday</div>
+  						<div class="filter" ng-click="selectFilterOption( 'Last 7 days' )">Last 7 days</div>
+  						<!-- <div class="filter" ng-click="selectFilterOption( 'Last 30 days' )">Last 30 days</div> -->
+  						<div class="filter" ng-click="selectFilterOption( 'Month' )">Month</div>
+  						<div class="filter" ng-click="selectFilterOption( 'Year' )">Year</div>
+  						<div class="filter" ng-click="selectFilterOption( 'Custom' )">Custom</div>
+  					</div>
+  					<div ng-show="isMonthFilterShow" class="month-filter">
+  						<div class="month-wrapper">
+  							<div class="filter" ng-repeat="list in months" ng-bind="list.name" ng-click="selectMonth( list.name )">January</div>
+  						</div>
+  						<div class="btn-cancel" ng-click="showMainFilter()">Cancel</div>
+  					</div>
+  					<div ng-show="isYearFilterShow" class="year-filter">
+  						<div class="year-wrapper">
+  							<div class="filter" ng-repeat="list in generateYears( 20 )" ng-bind="list" ng-click="selectYear( list )">2019</div>
+  						</div>	
+  						<div class="btn-cancel" ng-click="showMainFilter()">Cancel</div>
+  					</div>
+
+  				</div>
+  				<input ng-if="isCustomFilterShow" type="text" class="datepicker-input" ng-model="dateFilterVal">
   			</span>
-  		</p>
   	</div>
   </div>
 
@@ -46,7 +73,7 @@
 				</p>
 
 				<div class="chart-box">
-					<canvas id="pie" class="chart chart-pie" chart-data="expensesPieChartData" chart-labels="expensesPieChartLabels" chart-options="expensesPieChartOptions">
+					<canvas id="pie" class="chart chart-doughnut" chart-data="expensesPieChartData" chart-labels="expensesPieChartLabels" chart-options="expensesPieChartOptions">
 					</canvas>
 				</div>	
 			</div>
