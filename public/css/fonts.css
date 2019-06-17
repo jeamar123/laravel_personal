@@ -73,6 +73,11 @@
         src: url('../fonts/proximanova/Proxima Nova Thin.ttf')  format('truetype');
     }
 
+    @font-face {
+        font-family: 'Proximanova Semibold'; /* Global font */
+        src: url('../fonts/proximanova/Proxima Nova Semibold.ttf')  format('truetype');
+    }
+
 
 /*------------- Comfortaa ---------------*/
     @font-face {

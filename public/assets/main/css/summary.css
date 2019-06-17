@@ -17,7 +17,7 @@
 	background: #FFF;
 	border-radius: 2px;
 	padding: 20px;
-	box-shadow: 0px 0px 8px #aaa;
+	box-shadow: 0px 0px 5px #aaa;
 }
 .summary-item p.item-name{
 	font-size: 25px;
@@ -51,7 +51,7 @@
 	background: #FFF;
 	border-radius: 2px;
 	padding: 20px;
-	box-shadow: 0px 0px 8px #aaa;
+	box-shadow: 0px 0px 5px #aaa;
 	color: #000;
   font-size: 16px;
 }
@@ -78,7 +78,7 @@
 	background: #FFF;
   border-radius: 2px;
   padding: 20px;
-  box-shadow: 0px 0px 8px #aaa;
+  box-shadow: 0px 0px 5px #aaa;
 }
 
 

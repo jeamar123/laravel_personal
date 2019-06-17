@@ -5,7 +5,8 @@
   '$rootScope',
   'appModule',
   'sessionFactory',
-  function directive($http,$state,$stateParams,$rootScope,appModule,sessionFactory) {
+  '$timeout',
+  function directive($http,$state,$stateParams,$rootScope,appModule,sessionFactory,$timeout) {
     return {
       restrict: "A",
       scope: true,
@@ -24,6 +25,8 @@
         scope.filterValue = moment().format('MMMM YYYY');
         scope.start_date = moment();
         scope.end_date = moment();
+        scope.month_selected = moment().format('MMMM');
+        scope.year_selected = moment().format('YYYY');
 
 
 
@@ -86,6 +89,7 @@
         scope.selectMonth = ( opt ) =>{
           scope.filterValue = opt + " " + moment().format('YYYY');
           scope.isFilterShow = false;
+          scope.month_selected = opt;
           scope.start_date = moment( scope.filterValue, 'MMMM YYYY' ).startOf('month');
           scope.end_date = moment( scope.filterValue, 'MMMM YYYY' ).endOf('month');
           scope.sendDates();
@@ -93,6 +97,7 @@
         scope.selectYear = ( opt ) =>{
           scope.filterValue = opt;
           scope.isFilterShow = false;
+          scope.year_selected = opt;
           scope.start_date = moment( scope.filterValue, 'YYYY' ).startOf('year');
           scope.end_date = moment( scope.filterValue, 'YYYY' ).endOf('year');
           scope.sendDates();

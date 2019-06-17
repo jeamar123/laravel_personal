@@ -17,10 +17,13 @@ app.directive('expensesDirective', [
 
         scope.expenses_view = 'list';
 
-        scope.expenses_arr = [];
+        scope.expenses_list_arr = [];
+        scope.expenses_calendar_arr = [];
 
         scope.start_date = moment().startOf('month');
         scope.end_date = moment().endOf('month');
+
+        scope.monthly_total = 0;
 
 
         scope.setDates = ( ev, data ) =>{
@@ -38,15 +41,10 @@ app.directive('expensesDirective', [
             list.showDrop = false;
           }
         }
-        scope.showLoading = ( ) =>{
-          $( ".main-loader" ).css('display','flex');
+        scope.parseMonthDate = ( date ) =>{
+          return moment( date ).format('dddd, MMM DD, YYYY');
         }
-        scope.hideLoading = ( ) =>{
-          setTimeout(function() {
-            $( ".main-loader" ).fadeOut();
-          }, 1000);
-        }
-
+     
 
         // ------- HTTP REQUEST -------- //
           scope.getExpensesData = () =>{
@@ -57,12 +55,15 @@ app.directive('expensesDirective', [
             appModule.getExpensesPerMonth( data )
               .then(function(response){
                 console.log( response );
+                scope.expenses_list_arr = response.data.expenses;
+                scope.monthly_total = response.data.monthly_total;
               })
               .catch(function(err){
                 console.log( err );
               });
           }
         // ----------------------------- //
+
         // ------- INITIALIZE PLUGINS -------- //
           scope.$on('filter_dates', scope.setDates);
 
@@ -73,7 +74,7 @@ app.directive('expensesDirective', [
           // $('.modal').modal({
           //   keyboard : false
           // });
-        // ------------------------- //
+        // --------------------------------- //
 
         
 

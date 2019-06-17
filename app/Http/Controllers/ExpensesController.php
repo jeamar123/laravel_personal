@@ -23,34 +23,46 @@ class ExpensesController extends Controller
 
     public function getExpensesByMonth( Request $request ){
         $data = array();
-        $days_arr = array();
+        $dates_arr = array();
         $startDate = new DateTime( $request->get('start') );
         $endDate = new DateTime( $request->get('end') );
+        $month = date( 'M', strtotime( $request->get('start') ) );
+        $year = date( 'Y', strtotime( $request->get('start') ) );
         $num_days = $startDate->diff( $endDate );
-        $year = date( 'Y', $request->get('start') );
-        $month = date( 'MM', $request->get('start') );
-
-        $get_expenses = Expenses::whereBetween('full_date', [ $startDate, $endDate ])->get();
-
         $total_expenses = 0;
 
+        $get_expenses = Expenses::whereBetween('full_date', [ $startDate, $endDate ])
+            ->orderBy('full_date')
+            ->join('category', 'expenses.category_id', '=', 'category.id')
+            ->select( 'expenses.*', 'category.name as category_name' )
+            ->get();
+
         for( $i = 0; $i < $num_days->d + 1; $i++ ){
-            array_push( $days_arr, date('Y') ) ;
+            $temp_arr = array( 
+                "full_date" => date( 'Y-m-d', strtotime( $month . ' ' . ($i+1) . ' ' .$year ) ),
+                "expenses" => array(), 
+                "total" => 0
+            );
+            for( $x = 0; $x < count( $get_expenses ); $x++ ){
+                if( $get_expenses[$x]->full_date == $temp_arr['full_date'] ){
+                    $temp_arr['total'] += $get_expenses[$x]->value;
+                    array_push( $temp_arr['expenses'], $get_expenses[$x] );
+                }
+                if( $x == count( $get_expenses ) - 1 ){
+                    array_push( $dates_arr, $temp_arr );
+                }
+            }
+            
         }
-
-
+        
         for( $i = 0; $i < count( $get_expenses ); $i++ ){
             $total_expenses += $get_expenses[$i]->value;
         }
-
         
         if( $get_expenses ){
-            $data['year'] = $year;
-            $data['month'] = $month;
-            $data['days'] = $days_arr;
             $data['status'] = true;
             $data['message'] = 'Success';
-            $data['expenses'] = $get_expenses;
+            $data['expenses'] = $dates_arr;
             $data['monthly_total'] = $total_expenses;
         }else{
             $data['status'] = false;

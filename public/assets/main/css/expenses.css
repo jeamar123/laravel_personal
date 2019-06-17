@@ -115,12 +115,23 @@
 	overflow-y: auto;
   height: calc(100vh - 140px);
 }
+.list-total{
+	display: flex;
+  padding: 10px 50px 5px 25px;
+  font-family: 'Proximanova Semibold';
+  font-size: 20px;
+}
+.list-total p{
+	width: 200px;
+	margin: 0;
+}
+.list-total .list-total-value{
+	flex: 1;
+	text-align: right;
+}
 .list-calendar-container .date-box{
-	/*background: #fdfdfd;*/
-	/*border: 1px solid #ddd;*/
-	/*box-shadow: 0px 0px 8px #aaa;*/
-	margin: 5px 5px 10px 5px;
-	font-size: 12px;
+	margin: 5px;
+	/*font-size: 12px;*/
 	min-height: 45px;
 	padding: 10px 20px 10px 0;
 	color: #777;
@@ -132,27 +143,26 @@
 .list-calendar-container .expenses-box{
 	display: flex;
 	align-items: center;
+	padding: 10px 0;
 }
 .list-calendar-container .expenses-box .icon{
 	width: 35px;
 }
 .list-calendar-container .expenses-box .icon .oi{
-	height: 16px;
-	width: 16px;
 	display: inline-block;
   vertical-align: middle;
   font-size: 16px;
+  height: 19px;
 }
 .list-calendar-container .expenses-box .date-total{
 	flex: 1;
 	font-size: 15px;
 	text-align: right;
+	font-family: 'Proximanova Semibold';
 }
 .list-calendar-container .drop-expenses-container{
   margin-top: 10px;
-  /*padding-top: 10px;*/
   padding-left: 35px;
-  /*padding-bottom: 10px;*/
   border-top: 1px solid #f1f1f1;
 }
 .list-calendar-container .list-row{
@@ -173,8 +183,15 @@
   width: 10px;
   color: #666;
 }
+.list-calendar-container .list-row .checkbox{
+	width: 30px;
+}
+.list-calendar-container .list-row .checkbox input{
+	width: 20px;
+}
 .list-calendar-container .list-row .expenses-desc{
 	flex: 3;
+	text-transform: capitalize;
 }
 .list-calendar-container .list-row .expenses-cat{
 	flex: 1;
@@ -184,9 +201,34 @@
 	text-align: right;
 }
 .list-calendar-container .list-row.list-header{
-	padding: 5px 10px;
+	padding: 10px;
 }
 .list-calendar-container .list-row.list-header *{
 	font-family: 'Helvetica Bold';
 	color: #333;
 }
+.list-calendar-container .list-row.list-options{
+	background: none;
+	padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 5px;
+}
+.list-calendar-container .list-row.list-options .list-opt-box{
+	text-align: center;
+	background: #c7c4c4;
+	padding: 10px 0;
+	color: #FFF;
+	font-family: 'Proximanova Semibold';
+	margin-top: 10px;
+}
+.list-calendar-container .list-row.list-options .list-opt-box.disabled{
+	cursor: not-allowed;
+	opacity: .5;
+}
+.list-calendar-container .list-row.list-options .list-opt-box .oi{
+	margin-right: 5px;
+	font-size: 12px;
+}
+
+

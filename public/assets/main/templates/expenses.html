@@ -46,34 +46,51 @@
 			</div>
 		</div>
 
+		<div class="list-total">
+			<p>Total</p>
+			<div class="list-total-value">
+				$ <span ng-bind="monthly_total | number:2 ">1,000.00</span>
+			</div>
+		</div>
 		<div class="list-calendar-container" ng-if="expenses_view == 'list'">
-			<div class="date-box" ng-repeat="list in expenses_arr" >
+			<div ng-if="list.total != 0" class="date-box" ng-repeat="list in expenses_list_arr | orderBy:'-' " >
 				<div class="expenses-box" ng-click="toggleExpensesDrop( list )">
 					<div class="icon">
 						<span class="oi" data-glyph="caret-right" aria-hidden="true"></span>
 					</div>
 					<div class="date-value">
-						<p>Monday, April 01, 2019</p>
+						<p ng-bind="parseMonthDate( list.full_date )">Monday, April 01, 2019</p>
 					</div>
 					<div class="date-total">
-						<p>$<span>1,700.00</span></p>
+						<p>$<span ng-bind="list.total | number:2 ">1,700.00</span></p>
 					</div>
 				</div>
 
 				<div ng-if="list.showDrop" class="drop-expenses-container" >
 					<div class="list-row list-header">
+						<div class="checkbox">
+							<input type="checkbox" name="">
+						</div>
 						<p class="expenses-desc">Description</p>
 						<p class="expenses-cat">Category</p>
 						<div class="value">
 							<p>Value</p>
 						</div>
 					</div>
-					<div class="list-row" ng-repeat="list in [1,2,3]">
-						<p class="expenses-desc">Lorem Ipsum</p>
-						<p class="expenses-cat">Food</p>
-						<div class="value">
-							<p>$<span>1,000.00</span></p>
+					<div class="list-row" ng-repeat="expenses in list.expenses">
+						<div class="checkbox">
+							<input type="checkbox" name="">
 						</div>
+						<p class="expenses-desc" ng-bind="expenses.description">Lorem Ipsum</p>
+						<p class="expenses-cat" ng-bind="expenses.category_name">Food</p>
+						<div class="value">
+							<p>$<span ng-bind="expenses.value | number:2">1,000.00</span></p>
+						</div>
+					</div>
+					<div class="list-row list-options">
+						<div class="list-opt-box disabled"><span class="oi" data-glyph="plus" aria-hidden="true"></span> Add</div>
+						<div class="list-opt-box"><span class="oi" data-glyph="pencil" aria-hidden="true"></span> Edit</div>
+						<div class="list-opt-box"><span class="oi" data-glyph="trash" aria-hidden="true"></span> Delete</div>
 					</div>
 				</div>
 			</div>
