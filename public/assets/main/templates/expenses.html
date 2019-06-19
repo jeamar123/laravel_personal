@@ -14,6 +14,9 @@
           <input type="text" class="form-input" placeholder="Search Keyword">
         </div>
 			</div>
+			<div class="action-opt-container">
+				<div class="action-box" ng-click="showExpensesModal()"><span class="oi" data-glyph="plus" aria-hidden="true"></span> Add</div>
+			</div>
 			<div class="view-opt-container">
 				<button class="btn" ng-class="{'active' : expenses_view == 'list'}" ng-click="changeExpensesView( 'list' )"><span class="oi" data-glyph="menu" aria-hidden="true"></span></button>
 				<button class="btn" ng-class="{'active' : expenses_view == 'grid'}" ng-click="changeExpensesView( 'grid' )"><span class="oi" data-glyph="grid-three-up" aria-hidden="true"></span></button>
@@ -96,5 +99,49 @@
 			</div>
 		</div>
 
+  </div>
+
+  <!-- MODALS -->
+  <div id="expenses-modal" class="modal-mask" ng-if="isExpensesModalShow">
+  	<div class="modal-wrapper">
+	  	<div class="modal-container">
+		  	<div class="modal-header">
+		  		<p>
+		  			<span ng-if="idAddExpensesShow">Add Expenses</span>
+		  			<span ng-if="idEditExpensesShow">Edit Expenses</span>
+		  		</p>
+		  		<div class="close">
+		  			<span ng-click="closeExpensesModal()" class="oi" data-glyph="x" aria-hidden="true"></span>
+		  		</div>
+		  	</div>
+		  	<div class="modal-body">
+		  		<div class="add-expenses-wrapper">
+		  			<form>
+		  				<div class="form-div">
+			          <input type="text" class="form-input expenses-date-input" placeholder="Date">
+			        </div>
+			        <div class="form-div">
+			          <input type="text" class="form-input" placeholder="Description">
+			        </div>
+			        <div class="form-div">
+			          <input type="number" class="form-input" placeholder="Value" min="0">
+			        </div>
+			        <div class="form-div">
+			          <!-- <input type="text" class="form-input" placeholder="Category"> -->
+			          <select>
+			          	<option>Transportation</option>
+			          	<option>Food</option>
+			          	<option>Personal</option>
+			          	<option>Others</option>
+			          </select>
+			        </div>
+		  			</form>
+		  		</div>
+		  	</div>
+		  	<div class="modal-footer">
+		  		<button class="btn modal-button">Submit</button>
+		  	</div>
+	  	</div>
+  	</div>
   </div>
 </div>

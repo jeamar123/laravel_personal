@@ -107,6 +107,25 @@ p{
   .search-and-view-container .search-container{
     width: 300px;
   }
+  .search-and-view-container .action-opt-container{
+    flex: 1;
+  }
+  .search-and-view-container .action-opt-container .action-box{
+    text-align: center;
+    background: #c7c4c4;
+    padding: 6px 0;
+    color: #FFF;
+    margin: 1px 5px 1px 15px;
+    width: 85px;
+    height: 32px;
+    font-family: 'Proximanova Semibold';
+    cursor: pointer;
+  }
+  .search-and-view-container .action-opt-container .action-box .oi{
+    margin-right: 5px;
+    font-size: 12px;
+    cursor: pointer;
+  }
   .search-and-view-container .view-opt-container{
     flex: 1;
     text-align: right;
@@ -242,6 +261,11 @@ p{
     box-shadow: 0px 0px 8px #ddd;
     border-radius: 0;
     padding-bottom: 10px;
+    z-index: 99999;
+  }
+  .daterangepicker.single{
+    width: 300px;
+    box-shadow: 0px 0px 8px #ddd;
   }
   .daterangepicker:after {
     border-bottom: 6px solid #42525c;
@@ -286,6 +310,9 @@ p{
     width: 50%;
     padding: 0 !important;
     max-width: unset;
+  }
+  .daterangepicker .drp-calendar.single {
+    width: 100%;
   }
   .daterangepicker .drp-calendar.left .calendar-table {
     padding: 0;
@@ -581,14 +608,19 @@ p{
   }
 
   .modal-header{
-    background: #0392CF;
+    background: #2b3840;
     padding: 16px 20px;
+    display: flex;
+    align-items: center;
   }
 
   .modal-header p {
     color: #eee;
     font-weight: 700;
     font-size: 16px;
+    flex: 1;
+    margin: 0;
+    font-family: 'Proximanova Semibold';
   }
 
   .modal-header .close {
@@ -596,7 +628,7 @@ p{
     width: 50px;
   }
 
-  .modal-header .close a{
+  .modal-header .close .oi{
     font-size: 10px;
     color: #fff;
   }
@@ -606,7 +638,7 @@ p{
   }
 
   .modal-footer {
-    padding: 35px 10px 10px 10px;
+    padding: 20px 10px 10px 10px;
     text-align: right;
   }
 
@@ -695,27 +727,6 @@ p{
 
 
 /*----------- Forms -------------*/
-  form button{
-    display: inline-block;
-    border: none;
-    line-height: 1;
-    padding: 10px 15px;
-    font-size: 12px;
-    color: rgba(255,255,255,0.87);
-    background-color: #076086;
-    border-radius: 2px;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
-    -webkit-transition-duration: .5s;
-    transition-duration: .5s;
-    -webkit-transition-timing-function: cubic-bezier(.35,0,.25,1);
-    transition-timing-function: cubic-bezier(.35,0,.25,1);
-    -webkit-transition-property: background-color,fill,color;
-    transition-property: background-color,fill,color;
-    font-family: inherit;
-    text-align: center;
-    font-weight: 700;
-  }
-
   .form-div{
     margin: 10px 0;
     display: inline-block;
@@ -731,22 +742,6 @@ p{
     font-weight: 700;
   }
 
-  .form-div .form-input{
-    display: block;
-    margin: 0;
-    /*background: none;*/
-    padding: 2px 2px;
-    border-width: 0 0 1px;
-    line-height: 26px;
-    height: 30px;
-    border-radius: 0;
-    border-style: solid;
-    border-color: #ddd;
-    width: 100%;
-    box-sizing: border-box;
-    float: left;
-  }
-
   .form-div .form-checkbox,
   .form-div .form-radio{
     display: inline-block;
@@ -758,9 +753,6 @@ p{
     margin-right: 10px;
   }
 
-  .form-div .form-input:focus{
-    /*border-color: #076086;*/
-  }
 
   .form-div input[type="radio"] + label,
   .form-div input[type="checkbox"] + label{
@@ -797,6 +789,7 @@ p{
 
   .form-div select,
   .form-div input[type="text"],
+  .form-div input[type="number"],
   .form-div input[type="email"],
   .form-div input[type="password"]{
     width: 100%;

@@ -15,6 +15,9 @@
 	font-size: 20px;
 	font-family: 'Helvetica Bold';
 }
+.search-and-view-container{
+
+}
 .expenses-container .expenses-content{
 	height: calc(100vh - 70px);
 	/*overflow-y: auto;*/
@@ -221,6 +224,7 @@
 	color: #FFF;
 	font-family: 'Proximanova Semibold';
 	margin-top: 10px;
+	cursor: pointer;
 }
 .list-calendar-container .list-row.list-options .list-opt-box.disabled{
 	cursor: not-allowed;

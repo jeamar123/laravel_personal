@@ -5,7 +5,8 @@ app.directive('expensesDirective', [
   '$rootScope',
   'appModule',
   'sessionFactory',
-  function directive($http,$state,$stateParams,$rootScope,appModule,sessionFactory) {
+  '$timeout',
+  function directive($http,$state,$stateParams,$rootScope,appModule,sessionFactory,$timeout) {
     return {
       restrict: "A",
       scope: true,
@@ -25,6 +26,10 @@ app.directive('expensesDirective', [
 
         scope.monthly_total = 0;
 
+        scope.isExpensesModalShow = false;
+        scope.idAddExpensesShow = true;
+        scope.idEditExpensesShow = false;
+
 
         scope.setDates = ( ev, data ) =>{
           scope.start_date = data.start;
@@ -43,6 +48,13 @@ app.directive('expensesDirective', [
         }
         scope.parseMonthDate = ( date ) =>{
           return moment( date ).format('dddd, MMM DD, YYYY');
+        }
+        scope.showExpensesModal = () =>{
+          scope.isExpensesModalShow = true;
+          scope.initializeDatePicker();
+        }
+        scope.closeExpensesModal = () =>{
+          scope.isExpensesModalShow = false;
         }
      
 
@@ -65,15 +77,22 @@ app.directive('expensesDirective', [
         // ----------------------------- //
 
         // ------- INITIALIZE PLUGINS -------- //
+          scope.initializeDatePicker = () =>{
+            $timeout(function() {
+              $('.expenses-date-input').daterangepicker({
+                // timePicker: true,
+                // startDate: moment().startOf('hour'),
+                singleDatePicker: true,
+                showDropdowns: true,
+                autoApply: true,
+                endDate: moment(),
+                locale: {
+                  format: 'MMM DD, YYYY'
+                }
+              });
+            }, 100);
+          }
           scope.$on('filter_dates', scope.setDates);
-
-          $('.modal').on('hidden.bs.modal', function (e) {
-            scope.resetValues();
-          })
-
-          // $('.modal').modal({
-          //   keyboard : false
-          // });
         // --------------------------------- //
 
         
