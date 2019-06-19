@@ -8,6 +8,10 @@
         font-family: 'Open Sans Light'; /* Global font */
         src: url('../fonts/open-sans/OpenSans-Light.ttf')  format('truetype');
     }
+    @font-face {
+        font-family: 'Open Sans Bold'; /* Global font */
+        src: url('../fonts/open-sans/OpenSans-Bold.ttf')  format('truetype');
+    }
 
 
 
@@ -41,6 +45,10 @@
     @font-face {
         font-family: 'Roboto Light'; /* Global font */
         src: url('../fonts/roboto/Roboto-Light.ttf')  format('truetype');
+    }
+    @font-face {
+        font-family: 'Roboto Bold'; /* Global font */
+        src: url('../fonts/roboto/Roboto-Bold.ttf')  format('truetype');
     }
 
 

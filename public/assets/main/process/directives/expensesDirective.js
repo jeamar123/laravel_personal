@@ -27,8 +27,8 @@ app.directive('expensesDirective', [
         scope.monthly_total = 0;
 
         scope.isExpensesModalShow = false;
-        scope.idAddExpensesShow = true;
-        scope.idEditExpensesShow = false;
+        scope.isAddExpensesShow = true;
+        scope.isEditExpensesShow = false;
 
 
         scope.setDates = ( ev, data ) =>{
@@ -90,7 +90,7 @@ app.directive('expensesDirective', [
                   format: 'MMM DD, YYYY'
                 }
               });
-            }, 100);
+            }, 10);
           }
           scope.$on('filter_dates', scope.setDates);
         // --------------------------------- //

@@ -21,7 +21,8 @@ html{
 }
 
 button{
-  font-family: 'Helvetica Thin' !important;
+  /*font-family: 'Helvetica Thin' !important;*/
+  font-family: 'Helvetica Bold' !important;
 }
 
 /*button{
@@ -112,14 +113,15 @@ p{
   }
   .search-and-view-container .action-opt-container .action-box{
     text-align: center;
-    background: #c7c4c4;
+    background: #3BB6AD;
     padding: 6px 0;
     color: #FFF;
     margin: 1px 5px 1px 15px;
-    width: 85px;
+    width: 75px;
     height: 32px;
-    font-family: 'Proximanova Semibold';
+    font-family: 'Helvetica Bold';
     cursor: pointer;
+    /*font-size: 16px;*/
   }
   .search-and-view-container .action-opt-container .action-box .oi{
     margin-right: 5px;
@@ -227,7 +229,7 @@ p{
     border: none;
   }
   .date-filter-container .filter span{
-    font-family: 'Proximanova Semibold';
+    font-family: 'Helvetica Bold';
     color: #000;
   }
   .date-filter-container .filter.active{
@@ -608,7 +610,7 @@ p{
   }
 
   .modal-header{
-    background: #2b3840;
+    background: #1E8983;
     padding: 16px 20px;
     display: flex;
     align-items: center;
@@ -620,7 +622,7 @@ p{
     font-size: 16px;
     flex: 1;
     margin: 0;
-    font-family: 'Proximanova Semibold';
+    font-family: 'Helvetica Bold';
   }
 
   .modal-header .close {
@@ -646,10 +648,9 @@ p{
     display: inline-block;
     border: none;
     line-height: 1;
-    padding: 10px 15px;
-    font-size: 12px;
+    padding: 12px 25px;
     color: rgba(255,255,255,0.87);
-    background-color: #076086;
+    background-color: #26615d;
     border-radius: 2px;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
     text-transform: uppercase;
@@ -659,7 +660,7 @@ p{
     transition-timing-function: cubic-bezier(.35,0,.25,1);
     -webkit-transition-property: background-color,fill,color;
     transition-property: background-color,fill,color;
-    font-family: inherit;
+    font-family: 'Helvetica Bold' !important;
     text-align: center;
     font-weight: 700;
     margin: 0 5px;
