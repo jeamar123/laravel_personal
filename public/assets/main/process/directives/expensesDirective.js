@@ -14,30 +14,56 @@ app.directive('expensesDirective', [
       {
         console.log( "expensesDirective Runinng !" );
 
-        scope.showSelectYear = false;
+        
 
-        scope.expenses_view = 'list';
+        scope.expenses_view = localStorage.getItem('expenses_view') != null ? localStorage.getItem('expenses_view') : 'list';
 
         scope.expenses_list_arr = [];
         scope.expenses_calendar_arr = [];
+        scope.weekdays_long = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ];
 
         scope.start_date = moment().startOf('month');
         scope.end_date = moment().endOf('month');
+        scope.month_selected = moment().format('MMMM');
 
         scope.monthly_total = 0;
 
         scope.isExpensesModalShow = false;
         scope.isAddExpensesShow = true;
         scope.isEditExpensesShow = false;
+        scope.isEditExpensesShow = false;
+        scope.isExpensesListShow = false;
+
+        scope.selected_expenses_data = {};
 
 
+        scope.prevMonth = (  ) =>{
+          scope.start_date = moment( scope.start_date ).subtract( 1, 'month' ).startOf('month');
+          scope.end_date = moment( scope.end_date ).subtract( 1, 'month' ).endOf('month');
+          scope.month_selected = moment( scope.start_date ).format('MMMM');
+          var data = {
+            date : scope.start_date,
+          }
+          $rootScope.$broadcast('arrow_change_month', data);
+        }
+        scope.nextMonth = (  ) =>{
+          scope.start_date = moment( scope.start_date ).add( 1, 'month' ).startOf('month');
+          scope.end_date = moment( scope.end_date ).add( 1, 'month' ).endOf('month');
+          scope.month_selected = moment( scope.start_date ).format('MMMM');
+          var data = {
+            date : scope.start_date,
+          }
+          $rootScope.$broadcast('arrow_change_month', data);
+        }
         scope.setDates = ( ev, data ) =>{
           scope.start_date = data.start;
           scope.end_date = data.end;
+          scope.month_selected = moment( scope.start_date ).format('MMMM');
           scope.getExpensesData();
         }
         scope.changeExpensesView = ( view ) =>{
           scope.expenses_view = view;
+          localStorage.setItem('expenses_view', view);
         }
         scope.toggleExpensesDrop = ( list ) =>{
           if( !list.showDrop ){
@@ -47,9 +73,27 @@ app.directive('expensesDirective', [
           }
         }
         scope.parseMonthDate = ( date ) =>{
-          return moment( date ).format('dddd, MMM DD, YYYY');
+          return ( date ) ? moment( date ).format('dddd, MMMM DD, YYYY') : "_";
         }
-        scope.showExpensesModal = () =>{
+        scope.parseDay = ( date ) =>{
+          return ( date ) ? moment( date ).format('DD') : "_";
+        }
+        scope.showExpensesModal = ( opt, data ) =>{
+          console.log( data );
+          scope.isExpensesListShow = false;
+          scope.isAddExpensesShow = false;
+          scope.isEditExpensesShow = false;
+          if( opt == 'add' ){
+            scope.isAddExpensesShow = true;
+          }
+          if( opt == 'edit' ){
+            scope.isEditExpensesShow = true;
+            scope.selected_expenses_data = data;
+          }
+          if( opt == 'list' ){
+            scope.isExpensesListShow = true;
+            scope.selected_expenses_data = data;
+          }
           scope.isExpensesModalShow = true;
           scope.initializeDatePicker();
         }
@@ -92,6 +136,19 @@ app.directive('expensesDirective', [
               });
             }, 10);
           }
+
+          $("body").click(function(e){
+            // if ( $(e.target).parents(".modal-container").length === 0) {
+            if ( e.target.className == 'modal-wrapper' ) {
+              scope.isExpensesModalShow = false;
+              scope.isAddExpensesShow = true;
+              scope.isEditExpensesShow = false;
+              scope.isEditExpensesShow = false;
+              scope.isExpensesListShow = false;
+              scope.$apply();
+            }
+          });
+
           scope.$on('filter_dates', scope.setDates);
         // --------------------------------- //
 

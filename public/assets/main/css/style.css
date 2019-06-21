@@ -633,6 +633,7 @@ p{
   .modal-header .close .oi{
     font-size: 10px;
     color: #fff;
+    cursor: pointer;
   }
 
   .modal-body {
@@ -664,6 +665,7 @@ p{
     text-align: center;
     font-weight: 700;
     margin: 0 5px;
+    cursor: pointer;
   }
 
   .modal-button.cancel-button{

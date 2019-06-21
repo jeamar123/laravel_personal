@@ -87,7 +87,7 @@
           }
         } 
         scope.selectMonth = ( opt ) =>{
-          scope.filterValue = opt + " " + moment().format('YYYY');
+          scope.filterValue = opt + " " + scope.year_selected;
           scope.isFilterShow = false;
           scope.month_selected = opt;
           scope.start_date = moment( scope.filterValue, 'MMMM YYYY' ).startOf('month');
@@ -162,6 +162,13 @@
               }
             });
           }
+          scope.$on('arrow_change_month', function( ev, data ){
+            scope.start_date = moment( data.date ).startOf( 'month' );
+            scope.end_date = moment( data.date ).endOf( 'month' );
+            scope.filterValue = moment( data.date ).format( 'MMMM YYYY' );
+            scope.month_selected = moment( data.date ).format( 'MMMM' );
+            scope.sendDates();
+          });
         // ------------------------------- //
 
         scope.onLoad = ( ) =>{

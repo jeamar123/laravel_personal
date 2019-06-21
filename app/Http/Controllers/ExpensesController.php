@@ -23,6 +23,7 @@ class ExpensesController extends Controller
 
     public function getExpensesByMonth( Request $request ){
         $data = array();
+        $week_names = array( 0 => "Mon", 1 => "Tue", 2 => "Wed", 3 => "Thu", 4 => "Fri", 5 => "Sat", 6 => "Sun" );
         $dates_arr = array();
         $startDate = new DateTime( $request->get('start') );
         $endDate = new DateTime( $request->get('end') );
@@ -37,8 +38,11 @@ class ExpensesController extends Controller
             ->select( 'expenses.*', 'category.name as category_name' )
             ->get();
 
+
+
         for( $i = 0; $i < $num_days->d + 1; $i++ ){
             $temp_arr = array( 
+                "day" => date( 'D', strtotime( $month . ' ' . ($i+1) . ' ' .$year ) ),
                 "full_date" => date( 'Y-m-d', strtotime( $month . ' ' . ($i+1) . ' ' .$year ) ),
                 "expenses" => array(), 
                 "total" => 0
@@ -52,8 +56,31 @@ class ExpensesController extends Controller
                     array_push( $dates_arr, $temp_arr );
                 }
             }
-            
+
+          if( $i == $num_days->d && count( $dates_arr ) > 0 ){
+            $temp_day = $dates_arr[0]['day'];
+            $temp_name = array();
+            $y = 0;
+            while ( $y < 6 ) {
+              if( $week_names[$y] != $temp_day ){
+                $temp_arr = array( 
+                  "name" => $week_names[$y],
+                  "total" => 0,
+                  "isDisabled" => true
+                );
+                array_push( $temp_name, $temp_arr);
+                $y += 1;
+              }else{
+                for( $j = count($temp_name)-1; $j >= 0; $j-- ){
+                  array_unshift( $dates_arr, $temp_name[$j] );
+                }
+                $y = 7;
+              }
+            }
+          }
         }
+
+
         
         for( $i = 0; $i < count( $get_expenses ); $i++ ){
             $total_expenses += $get_expenses[$i]->value;
