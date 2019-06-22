@@ -6,7 +6,7 @@ body,html{
   /*height: 100%;*/
   width: 100%;
   background: #f1f1f1;
-  font-family: 'Helvetica Thin' !important;
+  font-family: 'Helvetica Light' !important;
   color: #444340;
   font-size: 14px;
   overflow-x: hidden;
@@ -21,8 +21,9 @@ html{
 }
 
 button{
-  /*font-family: 'Helvetica Thin' !important;*/
+  /*font-family: 'Helvetica Light' !important;*/
   font-family: 'Helvetica Bold' !important;
+  outline: none;
 }
 
 /*button{
@@ -48,7 +49,7 @@ button{
 }*/
 
 input, select, textarea{
-  font-family: 'Helvetica Thin';
+  font-family: 'Helvetica Light';
   font-weight: 700;
 }
 
@@ -307,6 +308,12 @@ p{
   .daterangepicker .drp-calendar.right .calendar-table th:last-child, 
   .daterangepicker .drp-calendar.right .calendar-table td:last-child{
     padding: 0 10px;
+  }
+  .daterangepicker.single .drp-calendar.left .calendar-table th:first-child, 
+  .daterangepicker.single .drp-calendar.left .calendar-table td:first-child,
+  .daterangepicker.single .drp-calendar.right .calendar-table th:last-child, 
+  .daterangepicker.single .drp-calendar.right .calendar-table td:last-child{
+    padding: 0;
   }
   .daterangepicker .drp-calendar{
     width: 50%;
@@ -596,13 +603,13 @@ p{
   }
 
   .modal-wrapper {
-    display: table-cell;
-    vertical-align: middle;
+    height: 100%;
+    overflow-y: auto;
   }
 
   .modal-container {
     width: 400px;
-    margin: 0px auto;
+    margin: 50px auto;
     background-color: #fff;
     border-radius: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
@@ -637,12 +644,14 @@ p{
   }
 
   .modal-body {
-    padding: 25px 20px;
+    /*padding: 25px 20px;*/
   }
 
   .modal-footer {
-    padding: 20px 10px 10px 10px;
+    padding: 10px;
     text-align: right;
+    border-top: 1px solid #f9f9f9;
+    height: 56px;
   }
 
   .modal-button{

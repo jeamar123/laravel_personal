@@ -121,6 +121,9 @@
 .grid-calendar-container .date-expenses-content .expenses p{
 	flex: 1;
 	margin: 0;
+	white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .grid-calendar-container .date-expenses-content .expenses .value{
 	flex: 1;
@@ -264,5 +267,56 @@
 	margin-right: 5px;
 	font-size: 12px;
 }
-
+#expenses-modal .add-expenses-wrapper{
+	padding: 25px 20px;
+}
+#expenses-modal .list-expenses-wrapper{
+	padding: 20px 15px 10px 15px;
+}
+#expenses-modal .list-expenses-wrapper .list-row{
+	display: flex;
+}
+#expenses-modal .list-expenses-wrapper .list-row.list-header{
+	border-bottom: 1px solid #f9f9f9;
+	margin-bottom: 10px;
+}
+#expenses-modal .list-expenses-wrapper .list-row.list-footer{
+	padding-top: 10px;
+}
+#expenses-modal .list-expenses-wrapper .list-row.list-header *,
+#expenses-modal .list-expenses-wrapper .list-row.list-footer *{
+	font-family: 'Helvetica Bold';
+	color: #333;
+}
+#expenses-modal .list-expenses-wrapper .list-row .checkbox{
+	width: 30px;
+}
+#expenses-modal .list-expenses-wrapper .list-row .expenses-desc{
+	flex: 1;
+	text-transform: capitalize;
+}
+#expenses-modal .list-expenses-wrapper .list-row .expenses-desc .expenses-cat{
+  font-size: 10px;
+  margin-left: 10px;
+}
+#expenses-modal .list-expenses-wrapper .list-row .value{
+	width: 120px;
+	text-align: right;
+	padding-right: 20px;
+}
+#expenses-modal .list-expenses-wrapper .list-body{
+  padding-right: 10px;
+  margin-right: -15px;
+}
+#expenses-modal .expenses-list-btns{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	width: 100%;
+}
+#expenses-modal .expenses-list-btns .modal-button{
+	background: #468882;
+}
+#expenses-modal .expenses-list-btns .modal-button.isDisabled{
+	background: #46888294;
+}
 

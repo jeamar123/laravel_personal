@@ -35,6 +35,7 @@ app.directive('expensesDirective', [
         scope.isExpensesListShow = false;
 
         scope.selected_expenses_data = {};
+        scope.selected_date_data = {};
 
 
         scope.prevMonth = (  ) =>{
@@ -92,7 +93,7 @@ app.directive('expensesDirective', [
           }
           if( opt == 'list' ){
             scope.isExpensesListShow = true;
-            scope.selected_expenses_data = data;
+            scope.selected_date_data = data;
           }
           scope.isExpensesModalShow = true;
           scope.initializeDatePicker();
@@ -113,6 +114,11 @@ app.directive('expensesDirective', [
                 console.log( response );
                 scope.expenses_list_arr = response.data.expenses;
                 scope.monthly_total = response.data.monthly_total;
+
+                angular.forEach( scope.expenses_list_arr, function( value, key ){
+                  value.full_date = value.full_date ? scope.parseMonthDate( value.full_date ) : null;
+                  value.showDrop = true;
+                });
               })
               .catch(function(err){
                 console.log( err );

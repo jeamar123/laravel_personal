@@ -11,7 +11,7 @@
 			<div class="search-container">
 				<div class="form-div">
 					<span class="oi" data-glyph="magnifying-glass" aria-hidden="true"></span>
-          <input type="text" class="form-input" placeholder="Search Keyword">
+          <input type="text" class="form-input" placeholder="Search Keyword" ng-model="search_filter">
         </div>
 			</div>
 			<div class="action-opt-container">
@@ -39,16 +39,16 @@
 			<div class="day-header" ng-repeat="list in weekdays_long" ng-bind="list"></div>
 		</div>
 		<div class="grid-calendar-container" ng-if="expenses_view == 'grid'">
-			<div ng-click="showExpensesModal( 'list', list )" class="date-box" ng-class="{'disabled' : list.isDisabled}" ng-repeat="list in expenses_list_arr">
+			<div ng-click="showExpensesModal( 'list', list )" class="date-box" ng-class="{'disabled' : list.isDisabled}" ng-repeat="list in expenses_list_arr | filter: search_filter">
 				<div class="date-value">
 				 <span ng-bind="parseDay( list.full_date )"></span>
 				</div>
 				<div class="date-expenses-content">
-					<div class="expenses" ng-repeat="expenses in list.expenses">
+					<div class="expenses" ng-repeat="expenses in list.expenses | filter: search_filter">
 						<!-- <div class="dot">
 							<span class="oi" data-glyph="media-stop" aria-hidden="true"></span>
 						</div> -->
-						<p><span ng-bind="expenses.description | limitTo: 10"></span>{{ expenses.description.length > 10 ? '...' : '' }}</p>
+						<p><span ng-bind="expenses.description"></span></p>
 						<div class="value">
 							<p>$<span ng-bind="expenses.value | number: 2">1,000.00</span></p>
 						</div>
@@ -69,13 +69,13 @@
 			</div>
 		</div>
 		<div class="list-calendar-container" ng-if="expenses_view == 'list'">
-			<div ng-if="list.total != 0" class="date-box" ng-repeat="list in expenses_list_arr | orderBy:'-' " >
+			<div ng-if="list.total != 0" class="date-box" ng-repeat="list in expenses_list_arr | orderBy:'-' | filter: search_filter" >
 				<div class="expenses-box" ng-click="toggleExpensesDrop( list )">
 					<div class="icon">
 						<span class="oi" data-glyph="caret-right" aria-hidden="true"></span>
 					</div>
 					<div class="date-value">
-						<p ng-bind="parseMonthDate( list.full_date )">Monday, April 01, 2019</p>
+						<p ng-bind="list.full_date">Monday, April 01, 2019</p>
 					</div>
 					<div class="date-total">
 						<p>$<span ng-bind="list.total | number: 2">1,700.00</span></p>
@@ -93,7 +93,7 @@
 							<p>Value</p>
 						</div>
 					</div>
-					<div class="list-row" ng-repeat="expenses in list.expenses">
+					<div class="list-row" ng-repeat="expenses in list.expenses | filter: search_filter">
 						<div class="checkbox">
 							<input type="checkbox" name="">
 						</div>
@@ -122,7 +122,7 @@
 		  		<p>
 		  			<span ng-if="isAddExpensesShow">Add Expenses</span>
 		  			<span ng-if="isEditExpensesShow">Edit Expenses</span>
-		  			<span ng-if="isExpensesListShow" ng-bind="parseMonthDate( selected_expenses_data.full_date )"></span>
+		  			<span ng-if="isExpensesListShow" ng-bind="parseMonthDate( selected_date_data.full_date )"></span>
 		  		</p>
 		  		<div class="close">
 		  			<span ng-click="closeExpensesModal()" class="oi" data-glyph="x" aria-hidden="true"></span>
@@ -153,10 +153,45 @@
 		  		</div>
 
 		  		<div ng-if="isExpensesListShow" class="list-expenses-wrapper">
-		  			
+		  			<div class="list-row list-header">
+		  				<div class="checkbox">
+								<input type="checkbox" name="">
+							</div>
+							<p class="expenses-desc">
+								Description
+							</p>
+							<div class="value">
+								Value
+							</div>
+						</div>
+			  			<div class="list-row" ng-repeat="expenses in selected_date_data.expenses">
+			  				<div class="checkbox">
+									<input type="checkbox" name="">
+								</div>
+								<p class="expenses-desc">
+									<span ng-bind="expenses.description">Lorem Ipsum</span>
+									<span class="expenses-cat" ng-bind="expenses.category_name">Food</span>
+								</p>
+								<div class="value">
+									<p>$<span ng-bind="expenses.value | number: 2">1,000.00</span></p>
+								</div>
+							</div>
+						<div class="list-row list-footer">
+							<p class="expenses-desc">
+								Total
+							</p>
+							<div class="value">
+								<p>$<span ng-bind="selected_date_data.total | number: 2">1,000.00</span></p>
+							</div>
+						</div>
 		  		</div>
 		  	</div>
-		  	<div class="modal-footer">
+		  	<div ng-if="isExpensesListShow" class="modal-footer expenses-list-btns">
+		  		<button class="btn modal-button isDisabled">Add</button>
+		  		<button class="btn modal-button">Edit</button>
+		  		<button class="btn modal-button">Delete</button>
+		  	</div>
+		  	<div ng-if="isAddExpensesShow || isEditExpensesShow" class="modal-footer">
 		  		<button ng-if="isAddExpensesShow" class="btn modal-button">Submit</button>
 		  		<button ng-if="isEditExpensesShow" class="btn modal-button">Update</button>
 		  	</div>
