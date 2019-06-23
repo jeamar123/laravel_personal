@@ -85,7 +85,7 @@
 				<div ng-if="list.showDrop" class="drop-expenses-container" >
 					<div class="list-row list-header">
 						<div class="checkbox">
-							<input type="checkbox" name="">
+							<input type="checkbox" ng-model="expenses_date_checkbox[$index]" ng-click="toggleAllExpensesItem( list.full_date, expenses_date_checkbox[$index] )">
 						</div>
 						<p class="expenses-desc">Description</p>
 						<p class="expenses-cat">Category</p>
@@ -95,7 +95,7 @@
 					</div>
 					<div class="list-row" ng-repeat="expenses in list.expenses | filter: search_filter">
 						<div class="checkbox">
-							<input type="checkbox" name="">
+							<input type="checkbox" ng-model="expenses_selected_checkbox[list.full_date][$index]" ng-click="selectExpensesItem( $index, expenses_selected_checkbox[$index], expenses, list.full_date )">
 						</div>
 						<p class="expenses-desc" ng-bind="expenses.description">Lorem Ipsum</p>
 						<p class="expenses-cat" ng-bind="expenses.category_name">Food</p>
@@ -106,7 +106,7 @@
 					<div class="list-row list-options">
 						<div class="list-opt-box disabled" ng-click="showExpensesModal( 'add', expenses )"><span class="oi" data-glyph="plus" aria-hidden="true"></span> Add</div>
 						<div class="list-opt-box" ng-click="showExpensesModal( 'edit' )"><span class="oi" data-glyph="pencil" aria-hidden="true"></span> Edit</div>
-						<div class="list-opt-box"><span class="oi" data-glyph="trash" aria-hidden="true"></span> Delete</div>
+						<div class="list-opt-box" ng-click="deleteExpenses()"><span class="oi" data-glyph="trash" aria-hidden="true"></span> Delete</div>
 					</div>
 				</div>
 			</div>
@@ -132,21 +132,18 @@
 		  		<div ng-if="isAddExpensesShow || isEditExpensesShow" class="add-expenses-wrapper">
 		  			<form>
 		  				<div class="form-div">
-			          <input type="text" class="form-input expenses-date-input" placeholder="Date">
+			          <input type="text" class="form-input expenses-date-input" placeholder="Date" ng-model="add_expenses_data.date">
 			        </div>
 			        <div class="form-div">
-			          <input type="text" class="form-input" placeholder="Description">
+			          <input type="text" class="form-input" placeholder="Description" ng-model="add_expenses_data.description">
 			        </div>
 			        <div class="form-div">
-			          <input type="number" class="form-input" placeholder="Value" min="0">
+			          <input type="number" class="form-input" placeholder="Value" min="0" ng-model="add_expenses_data.value">
 			        </div>
 			        <div class="form-div">
 			          <!-- <input type="text" class="form-input" placeholder="Category"> -->
-			          <select>
-			          	<option>Transportation</option>
-			          	<option>Food</option>
-			          	<option>Personal</option>
-			          	<option>Others</option>
+			          <select ng-model="add_expenses_data.category_id">
+			          	<option ng-repeat="list in expenses_categories" ng-bind="list.name" ng-value="list.id">Transportation</option>
 			          </select>
 			        </div>
 		  			</form>
@@ -189,10 +186,10 @@
 		  	<div ng-if="isExpensesListShow" class="modal-footer expenses-list-btns">
 		  		<button class="btn modal-button isDisabled">Add</button>
 		  		<button class="btn modal-button">Edit</button>
-		  		<button class="btn modal-button">Delete</button>
+		  		<button class="btn modal-button" ng-click="deleteExpenses()">Delete</button>
 		  	</div>
 		  	<div ng-if="isAddExpensesShow || isEditExpensesShow" class="modal-footer">
-		  		<button ng-if="isAddExpensesShow" class="btn modal-button">Submit</button>
+		  		<button ng-if="isAddExpensesShow" ng-disabled="!add_expenses_data.date || !add_expenses_data.description || !add_expenses_data.value || add_expenses_data.value == 0 || !add_expenses_data.category_id" class="btn modal-button" ng-click="addExpenses( add_expenses_data )">Submit</button>
 		  		<button ng-if="isEditExpensesShow" class="btn modal-button">Update</button>
 		  	</div>
 	  	</div>
