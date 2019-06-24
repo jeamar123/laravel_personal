@@ -62,7 +62,7 @@ app.directive('expensesDirective', [
           }
           $rootScope.$broadcast('arrow_change_month', data);
         }
-        scope.toggleAllExpensesItem = ( full_date, opt ) =>{
+        scope.toggleAllExpensesItem = ( full_date, opt, index ) =>{
           if( opt == false ){
             scope.expenses_selected = [];
             scope.expenses_selected_ids = [];
@@ -73,6 +73,11 @@ app.directive('expensesDirective', [
               angular.forEach( value.expenses, function( value2, key2 ){
                 scope.expenses_selected_checkbox[full_date].push( opt );
               });
+            }else{
+              scope.expenses_selected_checkbox[ value.full_date ] = [];
+            }
+            if( key != index ){
+              scope.expenses_date_checkbox[ key ] = false;
             }
           });
         }
@@ -99,6 +104,9 @@ app.directive('expensesDirective', [
         }
         scope.toggleExpensesDrop = ( list ) =>{
           if( !list.showDrop ){
+            angular.forEach( scope.expenses_list_arr, function( value, key ){
+              value.showDrop = false;
+            });
             list.showDrop = true;
           }else{
             list.showDrop = false;
@@ -156,10 +164,11 @@ app.directive('expensesDirective', [
             var data = {
               start : moment( scope.start_date ).format('YYYY-MM-DD'),
               end : moment( scope.end_date ).format('YYYY-MM-DD'),
+              user_id : 1
             }
             appModule.getExpensesPerMonth( data )
               .then(function(response){
-                // console.log( response );
+                // console.log( response ); 
                 scope.expenses_list_arr = response.data.expenses;
                 scope.monthly_total = response.data.monthly_total;
                 angular.forEach( scope.expenses_list_arr, function( value, key ){
@@ -260,6 +269,8 @@ app.directive('expensesDirective', [
         scope.onLoad = ( ) =>{
           scope.getExpensesData();
           scope.fetchCategories();
+
+          console.log( sessionFactory.getSession() );
         }
 
         scope.onLoad();

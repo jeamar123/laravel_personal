@@ -36,6 +36,7 @@ class ExpensesController extends Controller
             ->orderBy('full_date')
             ->join('category', 'expenses.category_id', '=', 'category.id')
             ->select( 'expenses.*', 'category.name as category_name' )
+            ->where('user_id', $request->get('user_id'))
             ->get();
 
 

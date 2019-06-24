@@ -14,7 +14,7 @@ app.directive('dashboardDirective', [
         console.log( "dashboardDirective Runinng !" );
 
         scope.onLoad = ( ) =>{
-
+          // $state.go('dashboard.summary');
         }
 
         scope.onLoad();

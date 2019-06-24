@@ -75,7 +75,7 @@
 						<span class="oi" data-glyph="caret-right" aria-hidden="true"></span>
 					</div>
 					<div class="date-value">
-						<p ng-bind="list.full_date">Monday, April 01, 2019</p>
+						<p ng-bind="list.full_date">Monday, April 01, 2019 </p>
 					</div>
 					<div class="date-total">
 						<p>$<span ng-bind="list.total | number: 2">1,700.00</span></p>
@@ -85,7 +85,7 @@
 				<div ng-if="list.showDrop" class="drop-expenses-container" >
 					<div class="list-row list-header">
 						<div class="checkbox">
-							<input type="checkbox" ng-model="expenses_date_checkbox[$index]" ng-click="toggleAllExpensesItem( list.full_date, expenses_date_checkbox[$index] )">
+							<input type="checkbox" ng-model="expenses_date_checkbox[$index]" ng-click="toggleAllExpensesItem( list.full_date, expenses_date_checkbox[$index], $index )">
 						</div>
 						<p class="expenses-desc">Description</p>
 						<p class="expenses-cat">Category</p>

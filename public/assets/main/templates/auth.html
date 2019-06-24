@@ -1,5 +1,13 @@
 <div class="auth-content" auth-directive>
+  <div class="auth-banner-container">
+    <img src="img/3122.jpg">
+    <div class="overlay"></div>
 
+    <div class="banner-text-wrapper">
+      <p class="header">Be Responsible</p>
+      <p class="sub-header">Manage your expenses</p>
+    </div>
+  </div>
   <div ng-if="!isSignupShow" class="login-container">
     <div class="box-content">
       <div class="img-wrapper">
@@ -19,23 +27,21 @@
 
         <div class="info-bottom txt-center">
           <div class="white-space-20"></div>
-          <p ng-if="login_err" class="text-error fw-700">User not found. Please check your credentials.</p>
           <div class="white-space-10"></div>
           <button type="submit" class="btn submit-btn">Go</button>
-          <div class="white-space-10"></div>
-          <a href="javascript:void(0)" ng-click="toggleSignup()" class="text-hover-underline"><p class="fs-11 fw-700 account-text">No Account yet? Sign up.</p></a>
+          <div class="white-space-20"></div>
+          <a href="javascript:void(0)" ng-click="toggleSignup()" class="text-hover-underline"><p class="fw-700 account-text">No Account yet? Sign up.</p></a>
         </div>
         
       </form>
     </div>
   </div>
-
   <div ng-if="isSignupShow" class="signup-container">
     <div class="box-content">
       <div class="img-wrapper">
         <img src="img/user.png">
       </div>
-      <form>
+      <form ng-submit="signup(signup_data)">
         <div class="form-div">
           <input type="text" class="form-input" id="semail" ng-model="signup_data.name" placeholder="Full Name">
         </div>
@@ -51,19 +57,14 @@
 
         <div class="info-bottom txt-center">
           <div class="white-space-20"></div>
-          <p ng-if="email_invalid_err" class="text-error fw-700">Email is invalid.</p>
-          <p ng-if="password_err" class="text-error fw-700">Password did not match.</p>
-          <p ng-if="some_err" class="text-error fw-700" ng-bind="err_message"></p>
-          <p ng-if="some_succ" class="text-success fw-700">Successfully created account. <a href="javascript:void(0)" ng-click="toggleSignup()" class="text-hover-underline">Login now !</a></p>
           <div class="white-space-10"></div>
-          <button ng-disabled="!signup_data.name || !signup_data.email || !signup_data.password || !signup_data.re_password" type="submit" class="btn  submit-btn" ng-click="signup(signup_data)">Submit</button>
-          <div class="white-space-10"></div>
-          <a href="javascript:void(0)" ng-click="toggleSignup()" class="text-hover-underline"><p class="fs-11 fw-700 account-text">Already have Account? Log in.</p></a>
+          <button type="submit" class="btn submit-btn" >Submit</button>
+          <div class="white-space-20"></div>
+          <a href="javascript:void(0)" ng-click="toggleSignup()" class="text-hover-underline"><p class="fw-700 account-text">Already have Account? Log in.</p></a>
         </div>
         
       </form>
     </div>
   </div>
-
 </div>
 

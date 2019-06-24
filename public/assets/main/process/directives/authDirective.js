@@ -14,6 +14,8 @@
         console.log( "authDirective Runinng !" );
 
         scope.isSignupShow = false;
+        scope.login_data = {};
+        scope.signup_data = {};
 
         scope.checkEmail = (email) => {
           var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -29,36 +31,47 @@
         }
 
         scope.login = ( login_data ) =>{
+          if( !login_data.email || !login_data.password ){
+            swal('Error!', 'Email and Password is required.','error');
+            return false;
+          }
           var data = {
             email: login_data.email,
             password: login_data.password
           }
           appModule.loginUser(data)
             .then(function(response) {
-              console.log(response);
+              // console.log(response);
               if( response.data.status ){
-                console.log( 'eut' );
-                scope.login_err = false;
                 sessionFactory.setSession( response.data.user.id );
                 $state.go('dashboard');
               }else{
-                scope.login_err = true;
+                swal('Error!', response.data.message,'error');
               }
             });
         }
 
         scope.signup = ( signup_data ) =>{
-          console.log(signup_data);
-
+          if( !signup_data.name ){
+            swal('Error!', 'Full Name is required.','error');
+            return false;
+          }
+          if( !signup_data.email ){
+            swal('Error!', 'Email is required.','error');
+            return false;
+          }
+          if( !signup_data.password ){
+            swal('Error!', 'Password is required.','error');
+            return false;
+          }
           if( scope.checkEmail( signup_data.email ) == true ){
-            scope.email_invalid_err = false;
-            if( signup_data.password == signup_data.re_password ){
-              scope.password_err = false;
-            }else{
-              scope.password_err = true;
+            if( signup_data.password != signup_data.re_password ){
+              swal('Error!', 'Passwords did not match.','error');
+              return false;
             }
           }else{
-            scope.email_invalid_err = true;
+            swal('Error!', 'Email Format is invalid.','error');
+            return false;
           }
           var data = {
             name: signup_data.name,
@@ -67,16 +80,12 @@
           }
           appModule.signupUser(data)
             .then(function(response) {
-              console.log(response);
+              // console.log(response);
               if( response.data.status ){
-                scope.some_err = false;
-                scope.err_message = null;
-                scope.some_succ = true;
-
+                swal('Success!', response.data.message,'success');
+                scope.isSignupShow = false;
               }else{
-                scope.some_succ = false;
-                scope.some_err = true;
-                scope.err_message = response.data.message;
+                swal('Error!', response.data.message,'error');
               }
             });
         }
@@ -88,9 +97,7 @@
         }
 
         scope.onLoad = ( ) =>{
-
           scope.checkSession();
-
         }
 
         scope.onLoad();
