@@ -346,6 +346,7 @@ app.directive('expensesDirective', [
             category_id : add_data.category_id,
             description : add_data.description,
             value : add_data.value,
+            user_id : sessionFactory.getSession()
           }
 
           appModule.submitExpenses( data )
