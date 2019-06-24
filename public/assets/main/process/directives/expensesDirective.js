@@ -348,7 +348,7 @@ app.directive('expensesDirective', [
             value : add_data.value,
             user_id : sessionFactory.getSession()
           }
-
+          console.log( data );
           appModule.submitExpenses( data )
             .then(function(response){
               console.log(response);
