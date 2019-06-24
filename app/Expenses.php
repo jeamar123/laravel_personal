@@ -15,6 +15,7 @@ class Expenses extends Model
 		'year', 
 		'category_id', 
 		'description', 
-		'value'
+		'value',
+		'user_id'
 	];
 }
