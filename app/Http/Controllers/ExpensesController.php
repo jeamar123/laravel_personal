@@ -56,6 +56,7 @@ class ExpensesController extends Controller
                     'category_id' => $request->get('category_id'),
                     'description' => $request->get('description'),
                     'value' => $request->get('value'),
+                    'user_id' => $request->get('user_id'),
                 ]);
 
         if( $create ){
