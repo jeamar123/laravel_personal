@@ -7,8 +7,12 @@ app.controller('mainController', function( $state, $scope , $rootScope, $statePa
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
     // console.log(fromState);
-    // console.log(toState);
+    // console.log(toState.name);
     $scope.current = toState.name;
+    if( toState.name == 'dashboard' ){
+      location.href = 'app#/dashboard/summary';
+      // $state.go('dashboard.summary');
+    };
   });
 
 	$scope.toggleRightBox = ( ) => {

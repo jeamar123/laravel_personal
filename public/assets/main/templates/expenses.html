@@ -15,7 +15,7 @@
         </div>
 			</div>
 			<div class="action-opt-container">
-				<div class="action-box" ng-click="showExpensesModal( 'add' )"><span class="oi" data-glyph="plus" aria-hidden="true"></span> Add</div>
+				<div class="action-box" ng-click="showExpensesModal( 'add', null, false )"><span class="oi" data-glyph="plus" aria-hidden="true"></span> Add</div>
 			</div>
 			<div class="view-opt-container">
 				<button class="btn" ng-class="{'active' : expenses_view == 'list'}" ng-click="changeExpensesView( 'list' )"><span class="oi" data-glyph="menu" aria-hidden="true"></span></button>
@@ -39,7 +39,7 @@
 			<div class="day-header" ng-repeat="list in weekdays_long" ng-bind="list"></div>
 		</div>
 		<div class="grid-calendar-container" ng-if="expenses_view == 'grid'">
-			<div ng-click="showExpensesModal( 'list', list )" class="date-box" ng-class="{'disabled' : list.isDisabled}" ng-repeat="list in expenses_list_arr | filter: search_filter">
+			<div ng-click="showExpensesModal( 'list', list, true )" class="date-box" ng-class="{'disabled' : list.isDisabled}" ng-repeat="list in expenses_list_arr | filter: search_filter">
 				<div class="date-value">
 				 <span ng-bind="parseDay( list.full_date )"></span>
 				</div>
@@ -95,7 +95,7 @@
 					</div>
 					<div class="list-row" ng-repeat="expenses in list.expenses | filter: search_filter">
 						<div class="checkbox">
-							<input type="checkbox" ng-model="expenses_selected_checkbox[list.full_date][$index]" ng-click="selectExpensesItem( $index, expenses_selected_checkbox[$index], expenses, list.full_date )">
+							<input type="checkbox" ng-model="expenses_selected_checkbox[list.full_date][$index]" ng-click="selectExpensesItem( $index, expenses_selected_checkbox[list.full_date][$index], expenses)">
 						</div>
 						<p class="expenses-desc" ng-bind="expenses.description">Lorem Ipsum</p>
 						<p class="expenses-cat" ng-bind="expenses.category_name">Food</p>
@@ -104,9 +104,9 @@
 						</div>
 					</div>
 					<div class="list-row list-options">
-						<div class="list-opt-box disabled" ng-click="showExpensesModal( 'add', expenses )"><span class="oi" data-glyph="plus" aria-hidden="true"></span> Add</div>
-						<div class="list-opt-box" ng-click="showExpensesModal( 'edit' )"><span class="oi" data-glyph="pencil" aria-hidden="true"></span> Edit</div>
-						<div class="list-opt-box" ng-click="deleteExpenses()"><span class="oi" data-glyph="trash" aria-hidden="true"></span> Delete</div>
+						<div class="list-opt-box" ng-class="{'disabled' : expenses_selected_ids.length > 0}" ng-click="showExpensesModal( 'add', list, false )"><span class="oi" data-glyph="plus" aria-hidden="true"></span> Add</div>
+						<div class="list-opt-box" ng-class="{'disabled' : expenses_selected_ids.length != 1}" ng-click="showExpensesModal( 'edit', null, false )"><span class="oi" data-glyph="pencil" aria-hidden="true"></span> Edit</div>
+						<div class="list-opt-box" ng-class="{'disabled' : expenses_selected_ids.length == 0}" ng-click="deleteExpenses()"><span class="oi" data-glyph="trash" aria-hidden="true"></span> Delete</div>
 					</div>
 				</div>
 			</div>
@@ -141,10 +141,7 @@
 			          <input type="number" class="form-input" placeholder="Value" min="0" ng-model="add_expenses_data.value">
 			        </div>
 			        <div class="form-div">
-			          <!-- <input type="text" class="form-input" placeholder="Category"> -->
-			          <select ng-model="add_expenses_data.category_id">
-			          	<option ng-repeat="list in expenses_categories" ng-bind="list.name" ng-value="list.id">Transportation</option>
-			          </select>
+			          <select ng-model="add_expenses_data.category_id" ng-options="list.id as list.name for list in expenses_categories"></select>
 			        </div>
 		  			</form>
 		  		</div>
@@ -152,7 +149,7 @@
 		  		<div ng-if="isExpensesListShow" class="list-expenses-wrapper">
 		  			<div class="list-row list-header">
 		  				<div class="checkbox">
-								<input type="checkbox" name="">
+								<input type="checkbox" ng-model="expenses_modal_selected_checkbox" ng-click="toggleAllExpensesItemListModal( selected_date_data.full_date, expenses_modal_selected_checkbox, selected_date_data )">
 							</div>
 							<p class="expenses-desc">
 								Description
@@ -163,7 +160,7 @@
 						</div>
 			  			<div class="list-row" ng-repeat="expenses in selected_date_data.expenses">
 			  				<div class="checkbox">
-									<input type="checkbox" name="">
+									<input type="checkbox" value="true" ng-model="expenses_modal_list_selected_checkbox[$index]" ng-click="selectExpensesItem( $index, expenses_modal_list_selected_checkbox[$index], expenses )">
 								</div>
 								<p class="expenses-desc">
 									<span ng-bind="expenses.description">Lorem Ipsum</span>
@@ -184,13 +181,15 @@
 		  		</div>
 		  	</div>
 		  	<div ng-if="isExpensesListShow" class="modal-footer expenses-list-btns">
-		  		<button class="btn modal-button isDisabled">Add</button>
-		  		<button class="btn modal-button">Edit</button>
-		  		<button class="btn modal-button" ng-click="deleteExpenses()">Delete</button>
+		  		<button class="btn modal-button" ng-class="{ 'isDisabled' : expenses_selected_ids.length > 0 }" ng-click="showExpensesModal( 'add', selected_date_data, true )">Add</button>
+		  		<button class="btn modal-button" ng-class="{ 'isDisabled' : expenses_selected_ids.length != 1 }" ng-click="showExpensesModal( 'edit', null, true )">Edit</button>
+		  		<button class="btn modal-button" ng-class="{ 'isDisabled' : expenses_selected_ids.length == 0 }" ng-click="deleteExpenses()">Delete</button>
 		  	</div>
 		  	<div ng-if="isAddExpensesShow || isEditExpensesShow" class="modal-footer">
+		  		<button ng-if="isFromListExpenses" class="btn modal-button" ng-click="backModalBtn( )">Back</button>
+
 		  		<button ng-if="isAddExpensesShow" ng-disabled="!add_expenses_data.date || !add_expenses_data.description || !add_expenses_data.value || add_expenses_data.value == 0 || !add_expenses_data.category_id" class="btn modal-button" ng-click="addExpenses( add_expenses_data )">Submit</button>
-		  		<button ng-if="isEditExpensesShow" class="btn modal-button">Update</button>
+		  		<button ng-if="isEditExpensesShow" class="btn modal-button" ng-click="updateExpenses( add_expenses_data )">Update</button>
 		  	</div>
 	  	</div>
   	</div>

@@ -23,6 +23,9 @@ app.directive('expensesDirective', [
         scope.expenses_selected_ids = [];
         scope.expenses_date_checkbox = [];
         scope.expenses_selected_checkbox = [];
+        scope.expenses_modal_list_selected_checkbox = [];
+        
+
         scope.weekdays_long = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ];
 
         scope.start_date = moment().startOf('month');
@@ -36,6 +39,8 @@ app.directive('expensesDirective', [
         scope.isEditExpensesShow = false;
         scope.isEditExpensesShow = false;
         scope.isExpensesListShow = false;
+        scope.isFromListExpenses = false;
+        scope.expenses_modal_selected_checkbox = false;
 
         scope.selected_expenses_data = {};
         scope.selected_date_data = {};
@@ -62,17 +67,42 @@ app.directive('expensesDirective', [
           }
           $rootScope.$broadcast('arrow_change_month', data);
         }
+        scope.removeAllCheckboxStatus = ( ) =>{
+          scope.expenses_selected = [];
+          scope.expenses_selected_ids = [];
+          angular.forEach( scope.expenses_list_arr , function( value, key ){
+            scope.expenses_selected_checkbox[ value.full_date ] = [];
+            value.showDrop = false;
+            scope.expenses_date_checkbox[ key ] = false;
+            angular.forEach( value.expenses, function( value2, key2 ){
+              scope.expenses_modal_list_selected_checkbox[key] = false;
+            });
+          });
+        }
+        scope.toggleAllExpensesItemListModal = ( full_date, opt, list ) =>{
+          scope.expenses_selected = [];
+          scope.expenses_selected_ids = [];
+          angular.forEach( list.expenses, function( value, key ){
+            scope.expenses_modal_list_selected_checkbox[key] = opt;
+            if( opt == true ){
+              scope.expenses_selected.push( value );
+              scope.expenses_selected_ids.push( value.id );
+            }
+          });
+        }
         scope.toggleAllExpensesItem = ( full_date, opt, index ) =>{
-          if( opt == false ){
-            scope.expenses_selected = [];
-            scope.expenses_selected_ids = [];
-          }
+          scope.expenses_selected = [];
+          scope.expenses_selected_ids = [];
           angular.forEach( scope.expenses_list_arr , function( value, key ){
             if( full_date == value.full_date ){
               scope.expenses_selected_checkbox[ full_date ] = [];
-              angular.forEach( value.expenses, function( value2, key2 ){
-                scope.expenses_selected_checkbox[full_date].push( opt );
-              });
+              if( opt == true ){
+                angular.forEach( value.expenses, function( value2, key2 ){
+                  scope.expenses_selected_checkbox[full_date].push( opt );
+                  scope.expenses_selected.push( value2 );
+                  scope.expenses_selected_ids.push( value2.id );
+                });
+              }
             }else{
               scope.expenses_selected_checkbox[ value.full_date ] = [];
             }
@@ -81,7 +111,7 @@ app.directive('expensesDirective', [
             }
           });
         }
-        scope.selectExpensesItem = ( index, opt, list, expenses_date ) =>{
+        scope.selectExpensesItem = ( index, opt, list ) =>{
           if( opt == true ){
             scope.expenses_selected.push( list );
             scope.expenses_selected_ids.push( list.id );
@@ -99,15 +129,25 @@ app.directive('expensesDirective', [
           scope.getExpensesData();
         }
         scope.changeExpensesView = ( view ) =>{
+          scope.removeAllCheckboxStatus();
           scope.expenses_view = view;
+          scope.expenses_selected = [];
+          scope.expenses_selected_ids = [];
           localStorage.setItem('expenses_view', view);
         }
         scope.toggleExpensesDrop = ( list ) =>{
+          scope.expenses_selected = [];
+          scope.expenses_selected_ids = [];
           if( !list.showDrop ){
             angular.forEach( scope.expenses_list_arr, function( value, key ){
               value.showDrop = false;
+              scope.expenses_date_checkbox[ key ] = false;
+              angular.forEach( value.expenses, function( value2, key2 ){
+                scope.expenses_selected_checkbox[ value.full_date ] = [];
+              });
             });
             list.showDrop = true;
+            scope.selected_date_data = list;
           }else{
             list.showDrop = false;
           }
@@ -118,7 +158,16 @@ app.directive('expensesDirective', [
         scope.parseDay = ( date ) =>{
           return ( date ) ? moment( date ).format('DD') : "_";
         }
-        scope.showExpensesModal = ( opt, data ) =>{
+        scope.backModalBtn = ( ) =>{
+          scope.isExpensesModalShow = true;
+          scope.initializeDatePicker();
+          scope.isExpensesListShow = false;
+          scope.isAddExpensesShow = false;
+          scope.isEditExpensesShow = false;
+          scope.isExpensesListShow = true;
+          scope.isFromListExpenses = true;
+        }
+        scope.showExpensesModal = ( opt, data, isFromList ) =>{
           scope.isExpensesModalShow = true;
           scope.initializeDatePicker();
           scope.isExpensesListShow = false;
@@ -126,23 +175,28 @@ app.directive('expensesDirective', [
           scope.isEditExpensesShow = false;
           if( opt == 'add' ){
             scope.isAddExpensesShow = true;
+            var date_value = data ? data.full_date : moment();
+            $timeout(function() { $('.expenses-date-input').data('daterangepicker').setStartDate( moment( date_value ).format( "MMM DD, YYYY" ) ); }, 50);
+            scope.add_expenses_data = {
+              date : moment( date_value ).format( "MMM DD, YYYY" )
+            }
           }
           if( opt == 'edit' ){
             scope.isEditExpensesShow = true;
-            $timeout(function() {
-              $('.expenses-date-input').data('daterangepicker').setStartDate( moment( scope.selected_expenses_data.full_date ).format( "MMM DD, YYYY" ) );
-            }, 50);
+            $timeout(function() { $('.expenses-date-input').data('daterangepicker').setStartDate( moment( scope.selected_expenses_data.full_date ).format( "MMM DD, YYYY" ) ); }, 50);
             scope.add_expenses_data = {
-              date : moment( scope.selected_expenses_data.full_date ).format( "MMM DD, YYYY" )
+              date : moment( scope.selected_expenses_data.full_date ).format( "MMM DD, YYYY" ),
+              description : scope.selected_expenses_data.description,
+              value : scope.selected_expenses_data.value,
+              category_id : scope.selected_expenses_data.category_id
             }
           }
           if( opt == 'list' ){
             scope.isExpensesListShow = true;
             scope.selected_date_data = data;
+            scope.toggleAllExpensesItemListModal( scope.selected_date_data.full_date, false, scope.selected_date_data );
           }
-          
-          console.log( scope.selected_date_data );
-          console.log( scope.selected_expenses_data );
+          scope.isFromListExpenses = isFromList;
         }
         scope.closeExpensesModal = () =>{
           scope.isExpensesModalShow = false;
@@ -174,6 +228,9 @@ app.directive('expensesDirective', [
                 angular.forEach( scope.expenses_list_arr, function( value, key ){
                   value.full_date = value.full_date ? scope.parseMonthDate( value.full_date ) : null;
                   value.showDrop = false;
+                  angular.forEach( value.expenses, function( value2, key2 ){
+                    scope.expenses_selected_checkbox[ value.full_date ] = [];
+                  });
                 });
               })
               .catch(function(err){
@@ -189,6 +246,7 @@ app.directive('expensesDirective', [
               category_id : add_data.category_id,
               description : add_data.description,
               value : add_data.value,
+              user_id : sessionFactory.getSession()
             }
             appModule.submitExpenses( data )
               .then(function(response){
@@ -230,6 +288,21 @@ app.directive('expensesDirective', [
               }
             });
           }
+          scope.updateExpenses =  ( update_data ) =>{
+            update_data.id = scope.selected_expenses_data.id;
+            appModule.saveExpenses( update_data )
+              .then(function(response){
+                // console.log(response);
+                if( response.data.status == true ){
+                  swal( 'Success!', response.data.message, 'success' );
+                  scope.isExpensesModalShow = false;
+                  scope.isAddExpensesShow = true;
+                  scope.onLoad();
+                }else{
+                  swal( 'Error!', response.data.message, 'error' );
+                }
+              });  
+          }
         // ----------------------------- //
 
         // ------- INITIALIZE PLUGINS -------- //
@@ -248,7 +321,6 @@ app.directive('expensesDirective', [
               });
             }, 10);
           }
-
           $("body").click(function(e){
             // if ( $(e.target).parents(".modal-container").length === 0) {
             if ( e.target.className == 'modal-wrapper' ) {
@@ -260,17 +332,19 @@ app.directive('expensesDirective', [
               scope.$apply();
             }
           });
-
           scope.$on('filter_dates', scope.setDates);
         // --------------------------------- //
 
         
-
+        scope.checkSession = ( ) =>{
+          if( sessionFactory.getSession() == 0 || sessionFactory.getSession() == null ){
+            $state.go('auth');
+          }
+        }
         scope.onLoad = ( ) =>{
           scope.getExpensesData();
           scope.fetchCategories();
-
-          console.log( sessionFactory.getSession() );
+          scope.checkSession();
         }
 
         scope.onLoad();

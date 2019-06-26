@@ -803,6 +803,10 @@ p{
     flex: 1;
   }
 
+  .form-div input{
+    outline: none;
+  }
+
   .form-div select,
   .form-div input[type="text"],
   .form-div input[type="number"],
