@@ -111,23 +111,27 @@ p{
   }
   .search-and-view-container .action-opt-container{
     flex: 1;
+    margin-left: 15px;
   }
   .search-and-view-container .action-opt-container .action-box{
     text-align: center;
     background: #3BB6AD;
     padding: 6px 0;
     color: #FFF;
-    margin: 1px 5px 1px 15px;
-    width: 75px;
+    margin: 1px 2px;
+    width: 85px;
     height: 32px;
     font-family: 'Helvetica Bold';
     cursor: pointer;
-    /*font-size: 16px;*/
+    display: inline-block;
+  }
+  .search-and-view-container .action-opt-container .action-box.disabled{
+    opacity: .5;
+    cursor: not-allowed;
   }
   .search-and-view-container .action-opt-container .action-box .oi{
     margin-right: 5px;
     font-size: 12px;
-    cursor: pointer;
   }
   .search-and-view-container .view-opt-container{
     flex: 1;
@@ -149,6 +153,20 @@ p{
   .search-and-view-container .view-opt-container button.active{
     background: #42525C;
     color: #eee;
+  }
+  .search-and-view-container .total-value-container{
+    flex: 1;
+    text-align: right;
+    font-family: 'Helvetica Bold';
+    font-size: 20px;
+  }
+  .search-and-view-container .total-value-container p{
+    margin: 0;
+    height: 100%;
+    line-height: 34px;
+  }
+  .search-and-view-container .total-value-container p label{
+    margin-right: 20px;
   }
 /*------------------------------------*/
 

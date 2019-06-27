@@ -5,7 +5,8 @@
   '$rootScope',
   'appModule',
   'sessionFactory',
-  function directive($http,$state,$stateParams,$rootScope,appModule,sessionFactory) {
+  '$timeout',
+  function directive($http,$state,$stateParams,$rootScope,appModule,sessionFactory,$timeout) {
     return {
       restrict: "A",
       scope: true,

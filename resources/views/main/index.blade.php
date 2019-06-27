@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/main/css/auth.css">
     <link rel="stylesheet" type="text/css" href="../assets/main/css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="../assets/main/css/expenses.css">
+    <link rel="stylesheet" type="text/css" href="../assets/main/css/income.css">
     <link rel="stylesheet" type="text/css" href="../assets/main/css/summary.css">
     <link rel="stylesheet" type="text/css" href="../css/custom.css">
     <link rel="stylesheet" type="text/css" href="../assets/main/css/responsive.css">
@@ -50,6 +51,7 @@
   <script type="text/javascript" src="<?php echo $server; ?>/assets/main/process/directives/dateSelectorDirective.js"></script>
   <script type="text/javascript" src="<?php echo $server; ?>/assets/main/process/directives/dashboardDirective.js"></script>
   <script type="text/javascript" src="<?php echo $server; ?>/assets/main/process/directives/expensesDirective.js"></script>
+  <script type="text/javascript" src="<?php echo $server; ?>/assets/main/process/directives/incomeDirective.js"></script>
   <script type="text/javascript" src="<?php echo $server; ?>/assets/main/process/directives/summaryDirective.js"></script>
 
 

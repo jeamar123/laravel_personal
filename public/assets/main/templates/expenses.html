@@ -6,7 +6,6 @@
   </div>
 
 	<div class="expenses-content">
-
 		<div class="search-and-view-container">
 			<div class="search-container">
 				<div class="form-div">
@@ -25,13 +24,19 @@
 
 		<div class="calendar-arrow-container">
 			<div class="arrow left">
-				<span class="oi" data-glyph="caret-left" aria-hidden="true" ng-click="prevMonth()"></span>
+				<label ng-click="prevMonth()">
+					<span class="oi" data-glyph="caret-left" aria-hidden="true" style="position: relative;left: -3px;"></span>
+					<!-- Prev  -->
+				</label>
 			</div>
 			<div class="month-arrow-value">
-				<span ng-bind="month_selected"></span>
+				<!-- <span ng-bind="month_selected"></span> -->
 			</div>
 			<div class="arrow right">
-				<span class="oi" data-glyph="caret-right" aria-hidden="true" ng-click="nextMonth()"></span>
+				<label ng-click="nextMonth()">
+					<!-- Next -->
+					<span class="oi" data-glyph="caret-right" aria-hidden="true" ></span> 
+				</label>
 			</div>
 		</div>
 
@@ -39,7 +44,7 @@
 			<div class="day-header" ng-repeat="list in weekdays_long" ng-bind="list"></div>
 		</div>
 		<div class="grid-calendar-container" ng-if="expenses_view == 'grid'">
-			<div ng-click="showExpensesModal( 'list', list, true )" class="date-box" ng-class="{'disabled' : list.isDisabled}" ng-repeat="list in expenses_list_arr | filter: search_filter">
+			<div ng-click="showExpensesModal( 'list', list, true, $index )" class="date-box" ng-class="{'disabled' : list.isDisabled}" ng-repeat="list in expenses_list_arr | filter: search_filter">
 				<div class="date-value">
 				 <span ng-bind="parseDay( list.full_date )"></span>
 				</div>
@@ -60,7 +65,6 @@
 				</div>
 			</div>
 		</div>
-
 
 		<div class="list-total" ng-if="expenses_view == 'list'">
 			<p>Total</p>
@@ -111,7 +115,6 @@
 				</div>
 			</div>
 		</div>
-
   </div>
 
   <!-- MODALS -->

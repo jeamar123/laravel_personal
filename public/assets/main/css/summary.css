@@ -1,5 +1,4 @@
 .summary-container{
-	height: 800px;
 }
 .summary-container .summary-content{
 	height: calc(100vh - 70px);

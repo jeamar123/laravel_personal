@@ -15,6 +15,7 @@ class CreateIncomeTable extends Migration
     {
         Schema::create('income', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
             $table->date('full_date');
             $table->integer('day');
             $table->integer('month');

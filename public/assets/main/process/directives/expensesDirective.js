@@ -34,9 +34,10 @@ app.directive('expensesDirective', [
 
         scope.monthly_total = 0;
 
+        scope.selected_date_data_index = null;
+
         scope.isExpensesModalShow = false;
         scope.isAddExpensesShow = true;
-        scope.isEditExpensesShow = false;
         scope.isEditExpensesShow = false;
         scope.isExpensesListShow = false;
         scope.isFromListExpenses = false;
@@ -167,7 +168,7 @@ app.directive('expensesDirective', [
           scope.isExpensesListShow = true;
           scope.isFromListExpenses = true;
         }
-        scope.showExpensesModal = ( opt, data, isFromList ) =>{
+        scope.showExpensesModal = ( opt, data, isFromList, index ) =>{
           scope.isExpensesModalShow = true;
           scope.initializeDatePicker();
           scope.isExpensesListShow = false;
@@ -194,6 +195,7 @@ app.directive('expensesDirective', [
           if( opt == 'list' ){
             scope.isExpensesListShow = true;
             scope.selected_date_data = data;
+            scope.selected_date_data_index = index;
             scope.toggleAllExpensesItemListModal( scope.selected_date_data.full_date, false, scope.selected_date_data );
           }
           scope.isFromListExpenses = isFromList;
@@ -218,7 +220,7 @@ app.directive('expensesDirective', [
             var data = {
               start : moment( scope.start_date ).format('YYYY-MM-DD'),
               end : moment( scope.end_date ).format('YYYY-MM-DD'),
-              user_id : 1
+              user_id : sessionFactory.getSession()
             }
             appModule.getExpensesPerMonth( data )
               .then(function(response){
@@ -232,6 +234,11 @@ app.directive('expensesDirective', [
                     scope.expenses_selected_checkbox[ value.full_date ] = [];
                   });
                 });
+                if( scope.isFromListExpenses ){
+                  scope.selected_date_data = scope.expenses_list_arr[ scope.selected_date_data_index ];
+                  scope.removeAllCheckboxStatus();
+                  scope.toggleAllExpensesItemListModal( scope.selected_date_data.full_date, false, scope.selected_date_data );
+                }
               })
               .catch(function(err){
                 console.log( err );
@@ -253,7 +260,7 @@ app.directive('expensesDirective', [
                 // console.log(response);
                 if( response.data.status == true ){
                   scope.add_expenses_data = {
-                    date : moment().format( 'MMM DD, YYYY' )
+                    date : moment( add_data.date ).format( 'MMM DD, YYYY' )
                   };
                   swal( "Success!", response.data.message, 'success' );
                   scope.onLoad();
@@ -265,7 +272,7 @@ app.directive('expensesDirective', [
           scope.deleteExpenses =  ( ) =>{
             swal({
               title: "Confirm",
-              text: "are you sure you want to delete these item(s)?",
+              text: "are you sure you want to delete " + scope.expenses_selected_ids.length + " item(s)?",
               type: "warning",
               showCancelButton: true,
               closeOnConfirm: true,
@@ -295,8 +302,11 @@ app.directive('expensesDirective', [
                 // console.log(response);
                 if( response.data.status == true ){
                   swal( 'Success!', response.data.message, 'success' );
-                  scope.isExpensesModalShow = false;
-                  scope.isAddExpensesShow = true;
+                  // scope.isExpensesModalShow = false;
+                  // scope.isAddExpensesShow = true;
+                  if( scope.isFromListExpenses ){
+                    scope.backModalBtn();
+                  }
                   scope.onLoad();
                 }else{
                   swal( 'Error!', response.data.message, 'error' );
@@ -309,8 +319,6 @@ app.directive('expensesDirective', [
           scope.initializeDatePicker = () =>{
             $timeout(function() {
               $('.expenses-date-input').daterangepicker({
-                // timePicker: true,
-                // startDate: moment().startOf('hour'),
                 singleDatePicker: true,
                 showDropdowns: true,
                 autoApply: true,
@@ -322,11 +330,9 @@ app.directive('expensesDirective', [
             }, 10);
           }
           $("body").click(function(e){
-            // if ( $(e.target).parents(".modal-container").length === 0) {
             if ( e.target.className == 'modal-wrapper' ) {
               scope.isExpensesModalShow = false;
               scope.isAddExpensesShow = true;
-              scope.isEditExpensesShow = false;
               scope.isEditExpensesShow = false;
               scope.isExpensesListShow = false;
               scope.$apply();
@@ -341,6 +347,7 @@ app.directive('expensesDirective', [
             $state.go('auth');
           }
         }
+
         scope.onLoad = ( ) =>{
           scope.getExpensesData();
           scope.fetchCategories();

@@ -24,7 +24,7 @@ class IncomeController extends Controller
     public function getIncomeByMonth( Request $request ){
         $data = array();
 
-        $get_income = Income::whereBetween('full_date', [ new DateTime( $request->get('start') ) , new DateTime( $request->get('end') ) ])->get();
+        $get_income = Income::whereBetween('full_date', [ new DateTime( $request->get('start') ) , new DateTime( $request->get('end') ) ])->where('user_id', $request->get('user_id'))->get();
         
         $total_income = 0;
 
@@ -55,6 +55,7 @@ class IncomeController extends Controller
                     'year' => $request->get('year'),
                     'description' => $request->get('description'),
                     'value' => $request->get('value'),
+                    'user_id' => $request->get('user_id'),
                 ]);
 
         if( $create ){

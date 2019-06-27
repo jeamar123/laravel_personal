@@ -1,5 +1,4 @@
 .expenses-container{
-	height: 800px;
 }
 .expenses-container .page-title{
 	height: 70px;
@@ -15,12 +14,20 @@
 	font-size: 20px;
 	font-family: 'Helvetica Bold';
 }
-.search-and-view-container{
-
-}
 .expenses-container .calendar-arrow-container{
 	display: flex;
-  padding: 20px 30px;
+  padding: 10px 30px 20px 30px;
+}
+.expenses-container .calendar-arrow-container .arrow label{
+  height: 100%;
+  width: 32px;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 2px;
+  padding: 6px 10px;
+  color: #FFF;
+  background: rgba(44, 121, 134, 0.55);
+  font-family: 'Helvetica Bold';
 }
 .expenses-container .calendar-arrow-container .arrow.left{
 	flex: 1;
@@ -35,8 +42,10 @@
 	font-size: 20px;
 }
 .expenses-container .calendar-arrow-container .arrow span{
-	cursor: pointer;
-  padding: 20px 10px;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 16px;
+  height: 18px;
 }
 .expenses-container .expenses-content{
 	height: calc(100vh - 70px);

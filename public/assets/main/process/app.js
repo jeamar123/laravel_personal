@@ -61,6 +61,17 @@ app.config(function($stateProvider, $urlRouterProvider){
           templateUrl: '../assets/main/templates/date-selector.html'
         },
       },
+    })
+    .state('dashboard.income', {
+      url: '/income',
+      views: {
+        'body-content@dashboard': {
+          templateUrl: '../assets/main/templates/income.html'
+        },
+        'date-selector@dashboard.income': {
+          templateUrl: '../assets/main/templates/date-selector.html'
+        },
+      },
     });
 
     $urlRouterProvider.otherwise('/auth');

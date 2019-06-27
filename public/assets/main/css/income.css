@@ -1,0 +1,81 @@
+.list-income-container{
+	padding: 20px 30px 100px 30px;
+  width: 100%;
+	overflow-y: auto;
+  height: calc(100vh - 140px);
+}
+.list-income-container .list-row{
+  width: 100%;
+  display: flex;
+  margin-bottom: 5px;
+  background: #FFF;
+  padding: 12px 10px;
+}
+.list-income-container .list-row p {
+	margin: 0;
+}
+.list-income-container .list-row .icon{
+	width: 20px;
+}
+.list-income-container .list-row .icon .oi{
+	display: inline-block;
+  vertical-align: middle;
+  font-size: 8px;
+  height: 10px;
+  width: 10px;
+  color: #666;
+}
+.list-income-container .list-row .checkbox{
+	width: 30px;
+}
+.list-income-container .list-row .checkbox input{
+	width: 20px;
+}
+.list-income-container .list-row .income-desc{
+	flex: 3;
+	text-transform: capitalize;
+}
+.list-income-container .list-row .income-date{
+	flex: 1;
+}
+.list-income-container .list-row .value{
+	flex: 1;
+	text-align: right;
+}
+.list-income-container .list-row.list-header{
+	padding: 10px;
+}
+.list-income-container .list-row.list-header *{
+	font-family: 'Helvetica Bold';
+	color: #333;
+}
+.list-income-container .list-row.list-options{
+	background: none;
+	padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 5px;
+}
+.list-income-container .list-row.list-options .list-opt-box{
+	text-align: center;
+	background: #317480;
+	padding: 10px 0;
+	color: #FFF;
+	font-family: 'Helvetica Bold';
+	margin-top: 10px;
+	cursor: pointer;
+}
+.list-income-container .list-row.list-options .list-opt-box.disabled{
+	cursor: not-allowed;
+	opacity: .5;
+	pointer-events:none;
+}
+.list-income-container .list-row.list-options .list-opt-box .oi{
+	margin-right: 5px;
+	font-size: 12px;
+}
+#income-modal .add-income-wrapper{
+	padding: 25px 20px;
+}
+
+

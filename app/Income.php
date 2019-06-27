@@ -14,6 +14,7 @@ class Income extends Model
 		'month', 
 		'year', 
 		'description', 
-		'value'
+		'value',
+		'user_id'
 	];
 }
