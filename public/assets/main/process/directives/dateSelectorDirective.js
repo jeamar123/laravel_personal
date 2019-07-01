@@ -22,11 +22,11 @@
         scope.isYearFilterShow = false;
         scope.isCustomFilterShow = false;
 
-        scope.filterValue = moment().format('MMMM YYYY');
-        scope.start_date = moment();
-        scope.end_date = moment();
-        scope.month_selected = moment().format('MMMM');
-        scope.year_selected = moment().format('YYYY');
+        scope.start_date = localStorage.getItem( 'selected_date' ) == null ? moment().startOf('month') : localStorage.getItem( 'selected_date' );
+        scope.end_date = moment( scope.start_date ).endOf('month');
+        scope.filterValue = moment( scope.start_date ).format('MMMM YYYY');
+        scope.month_selected = moment( scope.start_date ).format('MMMM');
+        scope.year_selected = moment( scope.start_date ).format('YYYY');
 
 
 
@@ -35,7 +35,22 @@
             start : scope.start_date,
             end : scope.end_date,
           }
+          localStorage.setItem( 'selected_date', scope.filterValue );
           $rootScope.$broadcast('filter_dates', data);
+        }
+        scope.prevMonth = (  ) =>{
+          scope.start_date = moment( scope.start_date ).subtract( 1, 'month' ).startOf('month');
+          scope.end_date = moment( scope.end_date ).subtract( 1, 'month' ).endOf('month');
+          scope.month_selected = moment( scope.start_date ).format('MMMM');
+          scope.filterValue = moment( scope.start_date ).format('MMMM YYYY');
+          scope.sendDates();
+        }
+        scope.nextMonth = (  ) =>{
+          scope.start_date = moment( scope.start_date ).add( 1, 'month' ).startOf('month');
+          scope.end_date = moment( scope.end_date ).add( 1, 'month' ).endOf('month');
+          scope.month_selected = moment( scope.start_date ).format('MMMM');
+          scope.filterValue = moment( scope.start_date ).format('MMMM YYYY');
+          scope.sendDates();
         }
         scope.showDateFilter = ( ) =>{
           scope.isFilterShow = true;
@@ -162,13 +177,6 @@
               }
             });
           }
-          scope.$on('arrow_change_month', function( ev, data ){
-            scope.start_date = moment( data.date ).startOf( 'month' );
-            scope.end_date = moment( data.date ).endOf( 'month' );
-            scope.filterValue = moment( data.date ).format( 'MMMM YYYY' );
-            scope.month_selected = moment( data.date ).format( 'MMMM' );
-            scope.sendDates();
-          });
         // ------------------------------- //
 
         scope.onLoad = ( ) =>{

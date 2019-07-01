@@ -48,7 +48,6 @@ class IncomeController extends Controller
     public function addIncome( Request $request ){
         $data = array();
         $create = Income::create([
-                    // 'category_id' => $request->get('category_id'),   
                     'full_date' => $request->get('full_date'),
                     'day' => $request->get('day'),
                     'month' => $request->get('month'),
@@ -73,6 +72,10 @@ class IncomeController extends Controller
         $data = array();
         
         $update_data = array(
+            'full_date' => $request->get('full_date'),
+            'day' => $request->get('day'),
+            'month' => $request->get('month'),
+            'year' => $request->get('year'),
             'description' => $request->get('description'),
             'value' => $request->get('value'),
         );
@@ -88,18 +91,16 @@ class IncomeController extends Controller
         return $data;
     }
 
-    public function deleteIncome( $id ){
+    public function deleteIncome( Request $request ){
         $data = array();
+        $ids_arr = $request->get('ids_arr');
 
-        $delete_item = Income::where('id', '=', $id)->delete();
-
-        if( $delete_item ){
-            $data['status'] = true;
-        $data['message'] = 'Successfully deleted.';
-        }else{
-            $data['status'] = false;
-            $data['message'] = 'Failed';
+        for( $i = 0; $i < count( $ids_arr ); $i++ ){
+            Income::where('id', '=', $ids_arr[$i])->delete();
         }
+
+        $data['status'] = true;
+        $data['message'] = 'Successfully deleted.';
         
         return $data;
     }

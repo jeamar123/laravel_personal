@@ -72,8 +72,12 @@ appService.factory('appModule', function( serverUrl, $http ){
     return $http.post(serverUrl.url + 'api/income/update', data);
   };
 
-  appFactory.removeAssets = function( id ) {
-    return $http.get(serverUrl.url + 'api/income/delete/' + id);
+  appFactory.removeAssets = function( data ) {
+    return $http.post(serverUrl.url + 'api/income/delete', data);
+  };
+
+  appFactory.getSummaryMonth = function( data ) {
+    return $http.post(serverUrl.url + 'api/summary/month', data);
   };
 
 

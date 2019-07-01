@@ -71,6 +71,9 @@ p{
   margin-bottom: 10px;
 }
 
+.cursor-pointer{
+  cursor: pointer;
+}
 
 /*-------- BODY --------------*/
   .main-body-container{
@@ -236,13 +239,25 @@ p{
     /*margin: 0 5px;*/
   }
   .date-filter-container .header-filter{
-    display: block;
+    display: flex;
+    width: 100%;
     text-align: center;
     padding: 10px;
     color: #fff;
-    cursor: pointer;
     font-family: 'Proximanova';
     background: #42525C;
+  }
+  .date-filter-container .header-filter .arrow{
+    flex: 1;
+    cursor: pointer;
+  }
+  .date-filter-container .header-filter .arrow .oi{
+    font-size: 14px;
+    position: relative;
+    top: 2px;
+  }
+  .date-filter-container .header-filter .filter-text{
+    flex: 2;
   }
   .date-filter-container .filter:last-child{
     border: none;

@@ -22,21 +22,10 @@
 			</div>
 		</div>
 
-		<div class="calendar-arrow-container">
-			<div class="arrow left">
-				<label ng-click="prevMonth()">
-					<span class="oi" data-glyph="caret-left" aria-hidden="true" style="position: relative;left: -3px;"></span>
-					<!-- Prev  -->
-				</label>
-			</div>
-			<div class="month-arrow-value">
-				<!-- <span ng-bind="month_selected"></span> -->
-			</div>
-			<div class="arrow right">
-				<label ng-click="nextMonth()">
-					<!-- Next -->
-					<span class="oi" data-glyph="caret-right" aria-hidden="true" ></span> 
-				</label>
+		<div class="list-total">
+			<p>Total</p>
+			<div class="list-total-value">
+				$ <span ng-bind="monthly_total | number: 2">1,000.00</span>
 			</div>
 		</div>
 
@@ -66,12 +55,7 @@
 			</div>
 		</div>
 
-		<div class="list-total" ng-if="expenses_view == 'list'">
-			<p>Total</p>
-			<div class="list-total-value">
-				$ <span ng-bind="monthly_total | number: 2">1,000.00</span>
-			</div>
-		</div>
+		
 		<div class="list-calendar-container" ng-if="expenses_view == 'list'">
 			<div ng-if="list.total != 0" class="date-box" ng-repeat="list in expenses_list_arr | orderBy:'-' | filter: search_filter" >
 				<div class="expenses-box" ng-click="toggleExpensesDrop( list )">

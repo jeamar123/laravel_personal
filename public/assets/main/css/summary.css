@@ -46,7 +46,7 @@
 }
 .weekly-report-container .weekly-expenses{
 	display: flex;
-	margin: 10px;
+	margin: 10px 0;
 	background: #FFF;
 	border-radius: 2px;
 	padding: 20px;

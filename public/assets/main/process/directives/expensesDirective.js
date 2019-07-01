@@ -28,9 +28,9 @@ app.directive('expensesDirective', [
 
         scope.weekdays_long = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ];
 
-        scope.start_date = moment().startOf('month');
-        scope.end_date = moment().endOf('month');
-        scope.month_selected = moment().format('MMMM');
+        scope.start_date = localStorage.getItem( 'selected_date' ) == null ? moment().startOf('month') : localStorage.getItem( 'selected_date' );
+        scope.end_date = moment( scope.start_date ).endOf('month');
+        scope.month_selected = moment( scope.start_date ).format('MMMM');
 
         scope.monthly_total = 0;
 
@@ -49,31 +49,11 @@ app.directive('expensesDirective', [
 
 
 
-
-        scope.prevMonth = (  ) =>{
-          scope.start_date = moment( scope.start_date ).subtract( 1, 'month' ).startOf('month');
-          scope.end_date = moment( scope.end_date ).subtract( 1, 'month' ).endOf('month');
-          scope.month_selected = moment( scope.start_date ).format('MMMM');
-          var data = {
-            date : scope.start_date,
-          }
-          $rootScope.$broadcast('arrow_change_month', data);
-        }
-        scope.nextMonth = (  ) =>{
-          scope.start_date = moment( scope.start_date ).add( 1, 'month' ).startOf('month');
-          scope.end_date = moment( scope.end_date ).add( 1, 'month' ).endOf('month');
-          scope.month_selected = moment( scope.start_date ).format('MMMM');
-          var data = {
-            date : scope.start_date,
-          }
-          $rootScope.$broadcast('arrow_change_month', data);
-        }
         scope.removeAllCheckboxStatus = ( ) =>{
           scope.expenses_selected = [];
           scope.expenses_selected_ids = [];
           angular.forEach( scope.expenses_list_arr , function( value, key ){
             scope.expenses_selected_checkbox[ value.full_date ] = [];
-            value.showDrop = false;
             scope.expenses_date_checkbox[ key ] = false;
             angular.forEach( value.expenses, function( value2, key2 ){
               scope.expenses_modal_list_selected_checkbox[key] = false;
@@ -141,7 +121,6 @@ app.directive('expensesDirective', [
           scope.expenses_selected_ids = [];
           if( !list.showDrop ){
             angular.forEach( scope.expenses_list_arr, function( value, key ){
-              value.showDrop = false;
               scope.expenses_date_checkbox[ key ] = false;
               angular.forEach( value.expenses, function( value2, key2 ){
                 scope.expenses_selected_checkbox[ value.full_date ] = [];
@@ -169,6 +148,9 @@ app.directive('expensesDirective', [
           scope.isFromListExpenses = true;
         }
         scope.showExpensesModal = ( opt, data, isFromList, index ) =>{
+          if( opt == 'edit' && scope.expenses_selected_ids.length != 1 ){
+            return false;
+          }
           scope.isExpensesModalShow = true;
           scope.initializeDatePicker();
           scope.isExpensesListShow = false;
@@ -229,7 +211,8 @@ app.directive('expensesDirective', [
                 scope.monthly_total = response.data.monthly_total;
                 angular.forEach( scope.expenses_list_arr, function( value, key ){
                   value.full_date = value.full_date ? scope.parseMonthDate( value.full_date ) : null;
-                  value.showDrop = false;
+                  value.showDrop = true;
+
                   angular.forEach( value.expenses, function( value2, key2 ){
                     scope.expenses_selected_checkbox[ value.full_date ] = [];
                   });
@@ -270,6 +253,9 @@ app.directive('expensesDirective', [
               });  
           }
           scope.deleteExpenses =  ( ) =>{
+            if( scope.expenses_selected_ids.length == 0 ){
+              return false;
+            }
             swal({
               title: "Confirm",
               text: "are you sure you want to delete " + scope.expenses_selected_ids.length + " item(s)?",
@@ -297,6 +283,10 @@ app.directive('expensesDirective', [
           }
           scope.updateExpenses =  ( update_data ) =>{
             update_data.id = scope.selected_expenses_data.id;
+            update_data.full_date = moment( update_data.date ).format( 'YYYY-MM-DD' );
+            update_data.day = moment( update_data.date ).format( 'D' );
+            update_data.month = moment( update_data.date ).format( 'MM' );
+            update_data.year = moment( update_data.date ).format( 'YYYY' );
             appModule.saveExpenses( update_data )
               .then(function(response){
                 // console.log(response);

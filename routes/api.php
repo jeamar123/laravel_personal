@@ -26,16 +26,12 @@ Route::post('/expenses/add', 'ExpensesController@addExpenses');
 Route::post('/expenses/update', 'ExpensesController@updateExpenses');
 Route::post('/expenses/delete', 'ExpensesController@deleteExpenses');
 
-Route::get('/investments', 'InvestmentsController@getInvestments');
-Route::post('/investments/month', 'InvestmentsController@getInvestmentsByMonth');
-Route::post('/investments/add', 'InvestmentsController@addInvestments');
-Route::post('/investments/update', 'InvestmentsController@updateInvestments');
-Route::get('/investments/delete/{id}', 'InvestmentsController@deleteInvestments');
-
 Route::get('/expenses_categories', 'ExpensesCategoryController@getCategories');
 
 Route::get('/income', 'IncomeController@getIncome');
 Route::post('/income/month', 'IncomeController@getIncomeByMonth');
 Route::post('/income/add', 'IncomeController@addIncome');
 Route::post('/income/update', 'IncomeController@updateIncome');
-Route::get('/income/delete/{id}', 'IncomeController@deleteIncome');
+Route::post('/income/delete', 'IncomeController@deleteIncome');
+
+Route::post('/summary/month', 'SummaryController@getSummaryByMonth');

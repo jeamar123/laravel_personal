@@ -9,15 +9,15 @@
 		<div class="main-summary-items">
 			<div class="summary-item">
 				<p class="item-name">Balance</p>
-				<p class="value">$ <span>1,000.00</span></p>
+				<p class="value">$ <span ng-bind="monthly_balance | number: 2">1,000.00</span></p>
 			</div>
-			<div class="summary-item">
+			<div class="summary-item cursor-pointer" ui-sref="dashboard.expenses">
 				<p class="item-name">Expenses</p>
-				<p class="value">$ <span>1,000.00</span></p>
+				<p class="value">$ <span ng-bind="monthly_expenses | number: 2">1,000.00</span></p>
 			</div>
-			<div class="summary-item">
+			<div class="summary-item cursor-pointer" ui-sref="dashboard.income">
 				<p class="item-name">Total Income</p>
-				<p class="value">$ <span>1,000.00</span></p>
+				<p class="value">$ <span ng-bind="monthly_income | number: 2">1,000.00</span></p>
 			</div>
 		</div>
 
@@ -49,9 +49,9 @@
 					Weekly Report
 				</p>
 
-				<div ng-repeat="list in [1,2,3,4]" class="weekly-expenses">
+				<div ng-repeat="list in weekly_values track by $index" class="weekly-expenses">
 					<label><span ng-bind="alphabet[ $index ]"></span> .</label>
-					<p>$S <span>1,500.00</span></p>
+					<p>$<span ng-bind="list | number: 2">1,500.00</span></p>
 				</div>
 			</div>
 			

@@ -40,7 +40,7 @@ app.controller('mainController', function( $state, $scope , $rootScope, $statePa
 	}
 	
 	$scope.onLoad = ( ) => {
-
+    localStorage.setItem( 'selected_date', moment( ).format('MMMM YYYY') );
 	}
 
 	$scope.onLoad();
