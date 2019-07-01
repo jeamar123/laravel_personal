@@ -140,8 +140,8 @@
 }
 
 .preloader-wrapper.big {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
 }
 
 .preloader-wrapper.active {
@@ -173,7 +173,7 @@
 
 .spinner-blue,
 .spinner-blue-only {
-  border-color: #33ACD5;
+  border-color: ##3A8C85;
 }
 
 .spinner-red,
@@ -498,7 +498,7 @@
 .circle-clipper .circle {
   width: 200%;
   height: 100%;
-  border-width: 4px;
+  border-width: 5px;
   /* STROKEWIDTH */
   border-style: solid;
   border-color: inherit;

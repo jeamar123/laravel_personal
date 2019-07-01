@@ -32,7 +32,6 @@ app.directive('summaryDirective', [
 
         // ------- HTTP REQUEST -------- //
           scope.getSummary = ( ev, data ) =>{
-            console.log( data );
             scope.start_date = data.start;
             scope.end_date = data.end;
             scope.month_selected = moment( scope.start_date ).format('MMMM');
@@ -49,6 +48,7 @@ app.directive('summaryDirective', [
               end : moment( scope.end_date ).endOf("month").format( 'MMMM DD, YYYY' ),
               user_id : sessionFactory.getSession()
             }
+            scope.showLoading();
             appModule.getSummaryMonth( data )
               .then(function(response){
                 console.log(response);
@@ -71,7 +71,7 @@ app.directive('summaryDirective', [
                   scope.expensesPieChartLabels.push( "No Expenses yet" );
                   scope.expensesPieChartData.push( 1 );
                 }
-                
+                scope.hideLoading();
               });
           }
         // -------------------- --------- //
@@ -105,7 +105,14 @@ app.directive('summaryDirective', [
           scope.$on('filter_dates', scope.getSummary);
         // ------------------------- //
 
-        
+        scope.showLoading = ( ) =>{
+          $( ".main-loader" ).show();
+        }
+        scope.hideLoading = ( ) =>{
+          setTimeout(function() {
+            $( ".main-loader" ).fadeOut();
+          }, 1000);
+        }
 
         scope.onLoad = ( ) =>{
           scope.fetchMonthSummary();

@@ -40,6 +40,7 @@
             email: login_data.email,
             password: login_data.password
           }
+          scope.showLoading();
           appModule.loginUser(data)
             .then(function(response) {
               // console.log(response);
@@ -49,6 +50,7 @@
               }else{
                 swal('Error!', response.data.message,'error');
               }
+              scope.hideLoading();
             });
         }
 
@@ -79,6 +81,7 @@
             email: signup_data.email,
             password: signup_data.password
           }
+          scope.showLoading();
           appModule.signupUser(data)
             .then(function(response) {
               // console.log(response);
@@ -88,7 +91,17 @@
               }else{
                 swal('Error!', response.data.message,'error');
               }
+              scope.hideLoading();
             });
+        }
+
+        scope.showLoading = ( ) =>{
+          $( ".main-loader" ).show();
+        }
+        scope.hideLoading = ( ) =>{
+          setTimeout(function() {
+            $( ".main-loader" ).fadeOut();
+          }, 1000);
         }
 
         scope.checkSession = ( ) =>{

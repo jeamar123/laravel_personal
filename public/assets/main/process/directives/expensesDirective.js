@@ -204,6 +204,7 @@ app.directive('expensesDirective', [
               end : moment( scope.end_date ).format('YYYY-MM-DD'),
               user_id : sessionFactory.getSession()
             }
+            scope.showLoading();
             appModule.getExpensesPerMonth( data )
               .then(function(response){
                 // console.log( response ); 
@@ -222,6 +223,7 @@ app.directive('expensesDirective', [
                   scope.removeAllCheckboxStatus();
                   scope.toggleAllExpensesItemListModal( scope.selected_date_data.full_date, false, scope.selected_date_data );
                 }
+                scope.hideLoading();
               })
               .catch(function(err){
                 console.log( err );
@@ -238,6 +240,7 @@ app.directive('expensesDirective', [
               value : add_data.value,
               user_id : sessionFactory.getSession()
             }
+            scope.showLoading();
             appModule.submitExpenses( data )
               .then(function(response){
                 // console.log(response);
@@ -250,6 +253,7 @@ app.directive('expensesDirective', [
                 }else{
                   swal( "Error!", response.data.message, 'error' );
                 }
+                scope.hideLoading();
               });  
           }
           scope.deleteExpenses =  ( ) =>{
@@ -268,6 +272,7 @@ app.directive('expensesDirective', [
                 var data = {
                   ids_arr : scope.expenses_selected_ids
                 }
+                scope.showLoading();
                 appModule.removeExpenses( data )
                   .then(function(response){
                     // console.log(response);
@@ -277,6 +282,7 @@ app.directive('expensesDirective', [
                     }else{
                       swal( 'Error!', response.data.message, 'error' );
                     }
+                    scope.hideLoading();
                   });
               }
             });
@@ -287,6 +293,7 @@ app.directive('expensesDirective', [
             update_data.day = moment( update_data.date ).format( 'D' );
             update_data.month = moment( update_data.date ).format( 'MM' );
             update_data.year = moment( update_data.date ).format( 'YYYY' );
+            scope.showLoading();
             appModule.saveExpenses( update_data )
               .then(function(response){
                 // console.log(response);
@@ -301,6 +308,7 @@ app.directive('expensesDirective', [
                 }else{
                   swal( 'Error!', response.data.message, 'error' );
                 }
+                scope.hideLoading();
               });  
           }
         // ----------------------------- //
@@ -331,7 +339,14 @@ app.directive('expensesDirective', [
           scope.$on('filter_dates', scope.setDates);
         // --------------------------------- //
 
-        
+        scope.showLoading = ( ) =>{
+          $( ".main-loader" ).show();
+        }
+        scope.hideLoading = ( ) =>{
+          setTimeout(function() {
+            $( ".main-loader" ).fadeOut();
+          }, 1000);
+        }
         scope.checkSession = ( ) =>{
           if( sessionFactory.getSession() == 0 || sessionFactory.getSession() == null ){
             $state.go('auth');

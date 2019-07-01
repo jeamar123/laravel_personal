@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="../css/open-iconic.css">
     <link rel="stylesheet" type="text/css" href="../css/sweetalert.css">
     <link rel="stylesheet" type="text/css" href="../css/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="../css/preloader.css">
     <link rel="stylesheet" type="text/css" href="../assets/main/css/style.css">
     <link rel="stylesheet" type="text/css" href="../assets/main/css/auth.css">
     <link rel="stylesheet" type="text/css" href="../assets/main/css/dashboard.css">
@@ -26,6 +27,24 @@
   <body ng-controller="mainController">
 
     <div ui-view="main" class="main-content-container"></div>
+
+    <div class="main-loader" hidden>
+      <div class="circle-loader">
+        <div class="preloader-container">
+          <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     
   </body>
 
