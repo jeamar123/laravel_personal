@@ -28,9 +28,9 @@
 
         scope.add_income_data = {};
 
-        scope.start_date = moment().startOf('month');
-        scope.end_date = moment().endOf('month');
-        scope.month_selected = moment().format('MMMM');
+        scope.start_date = localStorage.getItem( 'selected_date' ) == null ? moment().startOf('month') : localStorage.getItem( 'selected_date' );
+        scope.end_date = moment( scope.start_date ).endOf('month');
+        scope.month_selected = moment( scope.start_date ).format('MMMM');
 
 
         scope.toggleItemIncome = ( opt ) =>{
