@@ -110,11 +110,11 @@
           scope.sendDates();
         }
         scope.selectYear = ( opt ) =>{
-          scope.filterValue = opt;
+          scope.filterValue = scope.month_selected + " " + opt;
           scope.isFilterShow = false;
           scope.year_selected = opt;
-          scope.start_date = moment( scope.filterValue, 'YYYY' ).startOf('year');
-          scope.end_date = moment( scope.filterValue, 'YYYY' ).endOf('year');
+          scope.start_date = moment( scope.filterValue, 'MMMM YYYY' ).startOf('month');
+          scope.end_date = moment( scope.filterValue, 'MMMM YYYY' ).endOf('month');
           scope.sendDates();
         }
         scope.generateYears = ( num ) =>{
