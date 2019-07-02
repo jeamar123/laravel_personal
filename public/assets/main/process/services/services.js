@@ -16,6 +16,10 @@ appService.factory('appModule', function( serverUrl, $http ){
     return $http.post(serverUrl.url + 'api/signup', data);
   };
 
+  appFactory.getUserInfo = function( id ) {
+    return $http.get(serverUrl.url + 'api/user/' + id);
+  };
+
   // CATEGORIES
 
   appFactory.getExpensesCategories = function(  ) {
@@ -38,24 +42,6 @@ appService.factory('appModule', function( serverUrl, $http ){
 
   appFactory.removeExpenses = function( data ) {
     return $http.post(serverUrl.url + 'api/expenses/delete', data);
-  };
-
-  // INVESTMENTS
-
-  appFactory.getInvestmentsPerMonth = function( data ) {
-    return $http.post(serverUrl.url + 'api/investments/month', data);
-  };
-
-  appFactory.submitInvestments = function( data ) {
-    return $http.post(serverUrl.url + 'api/investments/add', data);
-  };
-
-  appFactory.saveInvestments = function( data ) {
-    return $http.post(serverUrl.url + 'api/investments/update', data);
-  };
-
-  appFactory.removeInvestments = function( id ) {
-    return $http.get(serverUrl.url + 'api/investments/delete/' + id);
   };
 
   // ASSETS

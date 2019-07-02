@@ -35,3 +35,5 @@ Route::post('/income/update', 'IncomeController@updateIncome');
 Route::post('/income/delete', 'IncomeController@deleteIncome');
 
 Route::post('/summary/month', 'SummaryController@getSummaryByMonth');
+
+Route::get('/user/{id}', 'UserController@getUserByID');

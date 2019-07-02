@@ -12,9 +12,18 @@ app.directive('dashboardDirective', [
       link: function link( scope, element, attributeSet )
       {
         console.log( "dashboardDirective Runinng !" );
+        scope.user_info = {};
+
+        scope.fetchUserInfo = ( ) =>{
+          appModule.getUserInfo( sessionFactory.getSession() )
+            .then(function(response){
+              console.log( response );
+              scope.user_info = response.data.user;
+            });
+        }
 
         scope.onLoad = ( ) =>{
-          // $state.go('dashboard.summary');
+          scope.fetchUserInfo();
         }
 
         scope.onLoad();
