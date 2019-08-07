@@ -5,7 +5,7 @@
 
     <div class="banner-text-wrapper">
       <p class="header">Be Responsible</p>
-      <p class="sub-header">Manage your expenses</p>
+      <p class="sub-header">Manage your own expenses</p>
     </div>
   </div>
   <div ng-if="!isSignupShow" class="login-container">
@@ -13,6 +13,8 @@
       <div class="img-wrapper">
         <img src="img/user-avatar.png">
       </div>
+      <p class="header">Be Responsible</p>
+      <p class="sub-header">Manage your own expenses</p>
       <form ng-submit="login(login_data)">
         <div class="form-div">
           <input type="email" class="form-input" id="email" ng-model="login_data.email" placeholder="Email">

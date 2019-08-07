@@ -82,8 +82,9 @@ p{
 
   .main-content-container{
     height: 100vh;
-    overflow-y: auto;
-    overflow-x: hidden;
+    /*overflow-y: auto;*/
+    /*overflow-x: hidden;*/
+    overflow: hidden;
   }
 /*-------------------------*/
 
