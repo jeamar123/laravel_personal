@@ -72,6 +72,14 @@ app.config(function($stateProvider, $urlRouterProvider){
           templateUrl: '../assets/main/templates/date-selector.html'
         },
       },
+    })
+    .state('dashboard.settings', {
+      url: '/settings',
+      views: {
+        'body-content@dashboard': {
+          templateUrl: '../assets/main/templates/settings.html'
+        },
+      },
     });
 
     $urlRouterProvider.otherwise('/auth');

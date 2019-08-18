@@ -33,6 +33,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/main/css/expenses.css">
     <link rel="stylesheet" type="text/css" href="../assets/main/css/income.css">
     <link rel="stylesheet" type="text/css" href="../assets/main/css/summary.css">
+    <link rel="stylesheet" type="text/css" href="../assets/main/css/settings.css">
     <link rel="stylesheet" type="text/css" href="../css/custom.css">
     <link rel="stylesheet" type="text/css" href="../assets/main/css/responsive.css">
   </head>
@@ -84,6 +85,7 @@
   <script type="text/javascript" src="<?php echo $server; ?>/assets/main/process/directives/expensesDirective.js"></script>
   <script type="text/javascript" src="<?php echo $server; ?>/assets/main/process/directives/incomeDirective.js"></script>
   <script type="text/javascript" src="<?php echo $server; ?>/assets/main/process/directives/summaryDirective.js"></script>
+  <script type="text/javascript" src="<?php echo $server; ?>/assets/main/process/directives/settingsDirective.js"></script>
 
 
 

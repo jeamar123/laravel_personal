@@ -1,0 +1,165 @@
+<div class="settings-container" settings-directive>
+	<div class="page-title">
+  	<p class="main-title">Account Settings</p>
+
+  	<div ui-view="date-selector"></div>
+  </div>
+
+	<div class="settings-content">
+		
+		<div class="account-wrapper">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Full Name</th>
+						<th>Email</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>asd</td>
+						<td>asd@gm.com</td>
+						<td>
+							<button class="table-btn" ng-click="editDetailsModal()"><span class="oi" data-glyph="pencil" aria-hidden="true"></span></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="white-space-20"></div>
+		<div class="password-wrapper">
+			<table class="table">
+				<tbody>
+					<tr>
+						<td style="color: #000;">Password</td>
+						<td>**********</td>
+						<td class="txt-right">
+							<button class="table-btn" ng-click="editPasswordModal()"><span class="oi" data-glyph="pencil" aria-hidden="true"></span></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="white-space-20"></div>
+		<div class="categories-wrapper">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Categories</th>
+						<th class="txt-right">
+							<button class="table-btn" ng-click="addCategoryModal()"><span class="oi" data-glyph="plus" aria-hidden="true"></span></button>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="list in [1,2,3,4,5]">
+						<td>lorem</td>
+						<td class="txt-right">
+							<button class="table-btn" ng-click="deleteCategory( 1 )"><span class="oi" data-glyph="trash" aria-hidden="true"></span></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+  </div>
+
+  <!-- MODALS -->
+  <div id="details-modal" class="modal-mask" ng-if="isEditDetailsModal">
+  	<div class="modal-wrapper">
+	  	<div class="modal-container">
+		  	<div class="modal-header">
+		  		<p>
+		  			Update Account Details
+		  		</p>
+		  		<div class="close">
+		  			<span ng-click="closeModal()" class="oi" data-glyph="x" aria-hidden="true"></span>
+		  		</div>
+		  	</div>
+		  	<div class="modal-body">
+		  		<div class="edit-details-wrapper">
+		  			<form>
+		  				<div class="form-div">
+			          <input type="text" class="form-input" placeholder="Full Name" ng-model="update_details_data.name">
+			        </div>
+			        <div class="form-div">
+			          <input type="text" class="form-input" placeholder="Email" ng-model="update_details_data.email">
+			        </div>
+		  			</form>
+		  		</div>
+		  	</div>
+		  	<div class="modal-footer">
+		  		<button ng-disabled="!update_details_data.name || !update_details_data.email" class="btn modal-button" ng-click="updateDetails( update_details_data )">Update</button>
+		  	</div>
+	  	</div>
+  	</div>
+  </div>
+
+  <!-- MODALS -->
+  <div id="password-modal" class="modal-mask" ng-if="isEditPasswordModal">
+  	<div class="modal-wrapper">
+	  	<div class="modal-container">
+		  	<div class="modal-header">
+		  		<p>
+		  			Update Password
+		  		</p>
+		  		<div class="close">
+		  			<span ng-click="closeModal()" class="oi" data-glyph="x" aria-hidden="true"></span>
+		  		</div>
+		  	</div>
+		  	<div class="modal-body">
+		  		<div class="edit-password-wrapper">
+		  			<form>
+		  				<div class="form-div">
+			          <input type="text" class="form-input" placeholder="Current Password" ng-model="update_password_data.curr_password">
+			        </div>
+			        <div class="form-div">
+			          <input type="text" class="form-input" placeholder="New Password" ng-model="update_password_data.new_password">
+			        </div>
+			        <div class="form-div">
+			          <input type="text" class="form-input" placeholder="Re-Type Password" ng-model="update_password_data.re_password">
+			        </div>
+		  			</form>
+		  		</div>
+		  	</div>
+		  	<div class="modal-footer">
+		  		<button ng-disabled="!update_password_data.curr_password || !update_password_data.new_password || !update_password_data.re_password" class="btn modal-button" ng-click="updatePassword( update_password_data )">Update</button>
+		  	</div>
+	  	</div>
+  	</div>
+  </div>
+
+  <!-- MODALS -->
+  <div id="add-category-modal" class="modal-mask" ng-if="isCategoriesModal">
+  	<div class="modal-wrapper">
+	  	<div class="modal-container">
+		  	<div class="modal-header">
+		  		<p>
+		  			<span>Add Category</span>
+		  		</p>
+		  		<div class="close">
+		  			<span ng-click="closeModal()" class="oi" data-glyph="x" aria-hidden="true"></span>
+		  		</div>
+		  	</div>
+		  	<div class="modal-body">
+		  		<div class="categories-wrapper">
+		  			<form>
+		  				<div class="form-div">
+			          <input type="text" class="form-input" placeholder="Description" ng-model="category_data.description">
+			        </div>
+		  			</form>
+		  		</div>
+		  	</div>
+		  	<div class="modal-footer">
+		  		<button ng-disabled="!category_data.description" class="btn modal-button" ng-click="addCategory( category_data )">Submit</button>
+		  	</div>
+	  	</div>
+  	</div>
+  </div>
+
+
+
+</div>

@@ -422,14 +422,13 @@ p{
   }
 
   table .table-btn{
+    display: inline-block;
     border: none;
     line-height: 1;
-    padding: 10px 15px;
-    font-size: 16px;
+    padding: 12px 25px;
     color: rgba(255,255,255,0.87);
-    background-color: #076086;
+    background-color: #26615d;
     border-radius: 2px;
-    height: 36px;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
     text-transform: uppercase;
     -webkit-transition-duration: .5s;
@@ -438,26 +437,16 @@ p{
     transition-timing-function: cubic-bezier(.35,0,.25,1);
     -webkit-transition-property: background-color,fill,color;
     transition-property: background-color,fill,color;
-    font-family: inherit;
-  }
-
-  table .table-btn:hover{
-    background-color: rgb(57,73,171);
+    font-family: 'Helvetica Bold' !important;
+    text-align: center;
+    font-weight: 700;
+    margin: 0 5px;
+    cursor: pointer;
   }
 
   table .table-btn .oi{
     vertical-align: middle;
     display: inline-block;
-  }
-
-  table .table-btn .text{
-    vertical-align: middle;
-    font-size: 12px;
-    padding-left: 8px;
-    font-weight: 700;
-    display: inline-block;
-    position: relative;
-    top: -1px;
   }
 /*------------------------------*/
 
