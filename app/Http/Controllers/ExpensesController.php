@@ -57,7 +57,7 @@ class ExpensesController extends Controller
           $temp_day = $dates_arr[0]['day'];
           $temp_name = array();
           $y = 0;
-          while ( $y < 6 ) {
+          while ( $y <= 6 ) {
             if( $week_names[$y] != $temp_day ){
               $temp_arr = array( 
                 "name" => $week_names[$y],
