@@ -28,6 +28,11 @@ app.directive('dashboardDirective', [
 
         scope.onLoad();
 
+
+        scope.$on('refreshUserInfo', function(event, args) {
+          scope.onLoad();
+        });
+
       }
     }
 

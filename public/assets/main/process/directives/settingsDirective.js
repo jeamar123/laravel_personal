@@ -37,15 +37,50 @@ app.directive('settingsDirective', [
           scope.isEditDetailsModal = false;
           scope.isEditPasswordModal = false;
           scope.isCategoriesModal = false;
+          scope.update_details_data = {};
+          scope.update_password_data = {};
         }
 
         // ------- HTTP REQUEST -------- //
 
           scope.updateDetails = ( update_data ) =>{
             console.log( update_data );
+            var data = {
+              id : sessionFactory.getSession(),
+              email : update_data.email,
+              name : update_data.name
+            }
+            appModule.updateUserInfo( data )
+              .then(function(response){
+                console.log( response );
+                if( response.data.status == true ){
+                  swal( 'Success!', response.data.message, 'success' );
+                  scope.closeModal();
+                  scope.onLoad();
+                  $rootScope.$broadcast('refreshUserInfo');
+                }else{
+                  swal( 'Error!', response.data.message, 'error' );
+                }
+              });
           }
           scope.updatePassword = ( update_data ) =>{
             console.log( update_data );
+            var data = {
+              id : sessionFactory.getSession(),
+              password : update_data.curr_password,
+              new_password : update_data.new_password
+            }
+            appModule.updatePasswordValue( data )
+              .then(function(response){
+                console.log( response );
+                if( response.data.status == true ){
+                  swal( 'Success!', response.data.message, 'success' );
+                  scope.closeModal();
+                  scope.onLoad();
+                }else{
+                  swal( 'Error!', response.data.message, 'error' );
+                }
+              });
           }
           scope.addCategory = ( data ) =>{
             console.log( data );

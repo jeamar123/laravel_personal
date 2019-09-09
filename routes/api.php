@@ -37,3 +37,5 @@ Route::post('/income/delete', 'IncomeController@deleteIncome');
 Route::post('/summary/month', 'SummaryController@getSummaryByMonth');
 
 Route::get('/user/{id}', 'UserController@getUserByID');
+Route::post('/user/update', 'UserController@updateUser');
+Route::post('/user/update/password', 'UserController@updatePassword');

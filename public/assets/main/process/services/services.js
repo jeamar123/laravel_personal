@@ -20,6 +20,14 @@ appService.factory('appModule', function( serverUrl, $http ){
     return $http.get(serverUrl.url + 'api/user/' + id);
   };
 
+  appFactory.updateUserInfo = function( data ) {
+    return $http.post(serverUrl.url + 'api/user/update', data);
+  };
+
+  appFactory.updatePasswordValue = function( data ) {
+    return $http.post(serverUrl.url + 'api/user/update/password', data);
+  };
+
   // CATEGORIES
 
   appFactory.getExpensesCategories = function(  ) {
